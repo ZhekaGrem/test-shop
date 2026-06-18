@@ -658,7 +658,7 @@ function EngineeringDocsHybrid() {
 // 3. Live Warehouse Log & Monitoring Console
 function WarehouseLogConsoleHybrid() {
   const [logs, setLogs] = useState([]);
-  const consoleEndRef = useRef(null);
+  const consoleRef = useRef(null);
 
   const logPool = [
     "API: Успішна синхронізація залишків із заводом ABB (Turgi, Switzerland).",
@@ -697,8 +697,8 @@ function WarehouseLogConsoleHybrid() {
   }, []);
 
   useEffect(() => {
-    if (consoleEndRef.current) {
-      consoleEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (consoleRef.current) {
+      consoleRef.current.scrollTop = consoleRef.current.scrollHeight;
     }
   }, [logs]);
 
@@ -729,11 +729,11 @@ function WarehouseLogConsoleHybrid() {
         </div>
 
         <div>
-          <div className="tech-console">
+          <div ref={consoleRef} className="tech-console">
             {logs.map((log, idx) => (
               <div key={idx} style={{ marginBottom: 4 }}>{log}</div>
             ))}
-            <div ref={consoleEndRef} style={{ display: "inline-block", width: 6, height: 12, background: "#10B981", animation: "blink 1s step-end infinite" }} />
+            <div style={{ display: "inline-block", width: 6, height: 12, background: "#10B981", animation: "blink 1s step-end infinite" }} />
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, fontSize: 11, color: "var(--muted)" }}>
             <span>Швидкість з'єднання: ~34ms (Kyiv Cloud Center)</span>
