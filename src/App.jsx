@@ -225,7 +225,7 @@ function App() {
 
         <TweakSection label="Акцентний колір (Custom)" />
         <TweakColor label="Колір бренду" value={t.accent}
-          options={["#1e7a4e", "#15603c", "#1f5fb0", "#7a4e1e", "#b23a26", "#15171c"]}
+          options={["#1e7a4e", "#15603c", "#1f5fb0", "#7a4e1e", "#b23a26", "#15171c", "#f97316", "#0f766e", "#2563EB"]}
           disabled={t.colorTheme !== "default"}
           onChange={(v) => setTweak("accent", v)} />
           
