@@ -407,7 +407,7 @@ export function QuickViewModal({ p, onClose, onAdd }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Закрити">✕</button>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 32, padding: 32 }} className="product-layout">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 24, padding: "24px 16px" }} className="product-layout">
           {/* Left: Product Glyph representation */}
           <div style={{ background: "var(--bg)", borderRadius: "var(--r-md)", padding: 24, display: "flex", alignItems: "center", justifyContent: "center", minHeight: 280, border: "1px solid var(--line)" }}>
             <ProductGlyph type={p.glyph} size={200} />

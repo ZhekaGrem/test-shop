@@ -593,7 +593,7 @@ function EngineeringDocsHybrid() {
       {/* SVG Schema Modal */}
       {activeSchema && (
         <div className="modal-overlay" onClick={() => setActiveSchema(null)}>
-          <div className="modal-container" style={{ maxWidth: 700, padding: 32 }} onClick={e => e.stopPropagation()}>
+          <div className="modal-container" style={{ maxWidth: 700, padding: "24px 20px" }} onClick={e => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setActiveSchema(null)}>×</button>
             <h3 style={{ marginBottom: 4 }}>Схематичне відображення · {activeSchema}</h3>
             <p style={{ fontSize: 13, color: "var(--muted)", marginBottom: 20 }}>Спрощена однолінійна схема комутаційних з'єднань ланцюгів.</p>
@@ -850,7 +850,7 @@ function ArchitecturalShowcaseSwiss() {
             className="modal-container" 
             style={{ 
               maxWidth: 640, 
-              padding: 40, 
+              padding: "32px 20px", 
               borderRadius: 0, 
               border: "3px solid var(--ink)", 
               boxShadow: "none" 
