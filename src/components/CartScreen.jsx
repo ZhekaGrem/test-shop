@@ -221,7 +221,7 @@ export function CartScreen({ go, cart, setCart, onAdd, onQuickView, theme }) {
               </div>
             </div>
             <div className="card" style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 38, height: 38, background: "var(--bg)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontWeight: 800, color: "var(--accent)" }}>%</div>
+              <div style={{ width: 38, height: 38, background: "var(--bg)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", flexShrink: 0, fontWeight: 800, color: "var(--accent)" }}>%</div>
               <div style={{ fontSize: 12.5, color: "var(--ink-2)" }}>Гуртовим клієнтам — додаткова знижка та відстрочка. <a onClick={() => go("home")} style={{ color: "var(--accent)", cursor: "pointer", fontWeight: 600 }}>Дізнатись →</a></div>
             </div>
           </div>

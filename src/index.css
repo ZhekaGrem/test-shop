@@ -364,6 +364,41 @@ a { color: inherit; text-decoration: none; }
 .search-bar:hover { box-shadow: 0 0 0 3px rgba(189,122,28,.12); }
 .cat-card:hover .glyph { transform: scale(1.04); transition: transform .2s; }
 
+/* quick-view button — clean hover-reveal overlay centered on the product image */
+.card-img-container { position: relative; }
+.quick-view-btn-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translate(-50%, 8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+  z-index: 3;
+}
+.card:hover .quick-view-btn-wrap,
+.card:focus-within .quick-view-btn-wrap {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+.quick-view-btn {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+  font-weight: 700;
+  box-shadow: var(--sh-md);
+  white-space: nowrap;
+}
+.quick-view-btn:hover { border-color: var(--ink); background: var(--paper); }
+/* touch devices have no hover — keep the action reachable */
+@media (hover: none) {
+  .quick-view-btn-wrap { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quick-view-btn-wrap { transition: none; }
+}
+
 /* image placeholder slot */
 .ph {
   background-color: var(--bg-2);

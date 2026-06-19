@@ -1217,17 +1217,8 @@ export function HomeScreen({ go, onAdd, onQuickView, theme }) {
     <div className="reveal">
       <HeroPanelHybrid go={go} />
       <CategoryGridHybrid go={go} />
-      <AssemblySectionHybrid />
-      
-      {/* New Rich Hybrid Components */}
-      <LoadCalculatorHybrid onAdd={onAdd} />
-      <EngineeringDocsHybrid />
-      <WarehouseLogConsoleHybrid />
-      <EngineeringFAQHybrid />
 
-      <LogisticsSectionHybrid />
-      
-      {/* Featured Products */}
+      {/* Товари — одразу після категорій: магазин має показувати товар, а не дашборди */}
       <section className="wrap" style={{ paddingTop: 56 }}>
         <SectionHead kicker="Рекомендуємо" title="Популярне у монтажників" action="Більше товарів →" onAction={() => go("catalog")} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }} className="prod-grid">
@@ -1236,6 +1227,17 @@ export function HomeScreen({ go, onAdd, onQuickView, theme }) {
           ))}
         </div>
       </section>
+
+      {/* Сигнатурний блок — інженерний калькулятор (унікальна цінність магазину) */}
+      <LoadCalculatorHybrid onAdd={onAdd} />
+
+      {/* Людський блок довіри — чому в нас купують */}
+      <TrustBlockHybrid go={go} />
+
+      <AssemblySectionHybrid />
+      <LogisticsSectionHybrid />
+      <EngineeringDocsHybrid />
+      <EngineeringFAQHybrid />
 
       {/* Brand row */}
       <section className="wrap" style={{ paddingTop: 56, paddingBottom: 64 }}>
@@ -1257,64 +1259,118 @@ export function HomeScreen({ go, onAdd, onQuickView, theme }) {
   );
 }
 
-// 5. Existing Hybrid layout blocks
+// Людський блок довіри — реальний кадр збірки щита замість фейк-телеметрії
+function TrustBlockHybrid({ go }) {
+  return (
+    <section className="wrap" style={{ paddingTop: 56 }}>
+      <div className="card hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", overflow: "hidden", padding: 0, alignItems: "stretch" }}>
+        <div className="trust-photo" style={{ minHeight: 380, backgroundImage: "url('/Documentary.png')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div style={{ padding: "44px 48px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <div className="u-label" style={{ color: "var(--accent)", marginBottom: 14 }}>Чому в нас купують</div>
+          <h2 style={{ fontSize: 27, marginBottom: 16, lineHeight: 1.15, letterSpacing: "-.01em" }}>Збираємо так, як зробили б собі</h2>
+          <p style={{ fontSize: 14.5, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 24 }}>
+            За кожним щитом — інженер, який підбере апаратуру під ваше навантаження, перевірить сумісність і випробує збірку під струмом. Не коробка з автоматами, а рішення, що працює роками.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 11, fontSize: 14 }}>
+            <div style={{ display: "flex", gap: 10 }}><span style={{ color: "var(--accent)", fontWeight: 800 }}>✓</span> Підбір під фактичне навантаження, а не «на око»</div>
+            <div style={{ display: "flex", gap: 10 }}><span style={{ color: "var(--accent)", fontWeight: 800 }}>✓</span> Оригінальна апаратура з гарантією виробника</div>
+            <div style={{ display: "flex", gap: 10 }}><span style={{ color: "var(--accent)", fontWeight: 800 }}>✓</span> Випробування кожної збірки на стенді під навантаженням</div>
+          </div>
+          <button className="btn btn-primary btn-sm" style={{ alignSelf: "flex-start", marginTop: 26 }} onClick={() => go("category")}>Зібрати щит під проєкт</button>
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 720px) {
+          .trust-photo { min-height: 240px !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// 5. Hero — neo-brutal: редакторський заголовок ліворуч + товар-специмен у строгій рамці праворуч.
+//    Гострі кути, видимі grid-лінії, без тіней — навмисна «приладова панель» над заокругленим тілом сайту.
 function HeroPanelHybrid({ go }) {
+  const rail = [
+    ["17", "років на ринку"],
+    ["12 000+", "позицій на складі"],
+    ["10", "офіційних брендів"],
+    ["день-у-день", "відправка до 16:00"],
+  ];
+  // Реєстраційні мітки кутів рамки — мова технічного креслення
+  const corners = [
+    { top: 8, left: 8, bt: 1, bl: 1 },
+    { top: 8, right: 8, bt: 1, br: 1 },
+    { bottom: 8, left: 8, bb: 1, bl: 1 },
+    { bottom: 8, right: 8, bb: 1, br: 1 },
+  ];
   return (
     <section className="wrap" style={{ paddingTop: 30, paddingBottom: 8 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1.55fr 1fr", gap: 16 }} className="hero-grid">
-        <div style={{ position: "relative", background: "var(--ink-surface)", color: "var(--on-dark)", borderRadius: "var(--r-lg)", overflow: "hidden", minHeight: 380, display: "flex" }}>
-          <div style={{ position: "relative", padding: "40px 48px", display: "flex", flexDirection: "column", justifyContent: "center", maxWidth: 560, zIndex: 5 }}>
-            <div className="u-label" style={{ color: "var(--accent)", marginBottom: 18 }}>Офіційний постачальник · 2008</div>
-            <h1 style={{ fontSize: 48, lineHeight: 1.02, letterSpacing: "-.03em", fontWeight: 800, marginBottom: 18 }}>
-              Електрообладнання<br />для тих, хто рахує<br /><span style={{ color: "var(--accent)" }}>аптайм.</span>
+      <div className="hero-brutal" style={{ border: "1px solid var(--ink)", background: "var(--paper)" }}>
+        <div className="hero-brutal-grid" style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr" }}>
+          {/* LEFT — editorial headline */}
+          <div className="hero-brutal-left" style={{ padding: "52px 48px 44px", borderRight: "1px solid var(--ink)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28 }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-2)", whiteSpace: "nowrap" }}>EST. 2008 — Офіційний постачальник</span>
+              <span style={{ flexGrow: 1, height: 1, background: "var(--line-2)" }} />
+            </div>
+            <h1 style={{ fontSize: "clamp(36px, 4.8vw, 60px)", lineHeight: .98, letterSpacing: "-.03em", fontWeight: 800, textTransform: "uppercase", margin: 0 }}>
+              Електро-<br />обладнання<br />для тих, хто<br />рахує <span style={{ color: "var(--accent)" }}>аптайм.</span>
             </h1>
-            <p style={{ fontSize: 14.5, color: "var(--on-dark-muted)", lineHeight: 1.6, marginBottom: 28, maxWidth: 420 }}>
-              Автомати, ПЗВ, частотники, контактори, реле та шафи від ABB, Schneider, Eaton, ETI. Складський запас, відправка день-у-день, ціни для монтажників і проєктів.
+            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, margin: "26px 0 34px", maxWidth: 440 }}>
+              Автомати, ПЗВ, частотники, контактори, реле та шафи від ABB, Schneider, Eaton, ETI. Складський запас і ціни для монтажників.
             </p>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <button className="btn btn-accent btn-lg" onClick={() => go("category")}>Перейти в каталог</button>
-              <button className="btn btn-lg" style={{ background: "transparent", color: "#fff", border: "1px solid var(--line-dark)" }} onClick={() => go("catalog")}>Підбір за параметрами</button>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              <button onClick={() => go("category")} style={{ appearance: "none", cursor: "pointer", background: "var(--ink)", color: "var(--on-dark)", border: "1px solid var(--ink)", borderRadius: 0, height: 52, padding: "0 30px", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 14, letterSpacing: ".06em", textTransform: "uppercase", transition: "background .15s" }} onMouseEnter={(e) => (e.currentTarget.style.background = "#000")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--ink)")}>
+                Каталог →
+              </button>
+              <button onClick={() => go("catalog")} style={{ appearance: "none", cursor: "pointer", background: "transparent", color: "var(--ink)", border: "1px solid var(--ink)", borderLeft: "none", borderRadius: 0, height: 52, padding: "0 26px", fontFamily: "var(--sans)", fontWeight: 700, fontSize: 14, letterSpacing: ".06em", textTransform: "uppercase", transition: "background .15s, color .15s" }} onMouseEnter={(e) => { e.currentTarget.style.background = "var(--ink)"; e.currentTarget.style.color = "var(--on-dark)"; }} onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--ink)"; }}>
+                Підбір за параметрами
+              </button>
             </div>
           </div>
-          {/* Generated Hybrid 3D Render Image */}
-          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "45%", display: "flex", alignItems: "center", justifyContent: "flex-end" }} className="hide-md">
-            <div style={{ width: "100%", height: "100%", backgroundImage: "url('/breaker_hybrid.png')", backgroundSize: "cover", backgroundPosition: "center left", opacity: 0.85, borderLeft: "1px solid var(--line-dark)" }} />
+
+          {/* RIGHT — framed product specimen */}
+          <div className="hero-brutal-right" style={{ padding: 26, display: "flex", flexDirection: "column", gap: 14, background: "var(--bg-2)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "var(--mono)", fontSize: 10.5, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--muted)" }}>
+              <span>Fig. 01 — Модульний автомат</span>
+              <span style={{ color: "var(--accent-strong)", fontWeight: 600 }}>● В наявності</span>
+            </div>
+            <div style={{ position: "relative", flexGrow: 1, border: "1px solid var(--ink)", background: "var(--paper)", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 300, padding: 26 }}>
+              {corners.map((c, i) => (
+                <span key={i} aria-hidden="true" style={{ position: "absolute", top: c.top, bottom: c.bottom, left: c.left, right: c.right, width: 12, height: 12, borderTop: c.bt ? "2px solid var(--ink)" : "none", borderBottom: c.bb ? "2px solid var(--ink)" : "none", borderLeft: c.bl ? "2px solid var(--ink)" : "none", borderRight: c.br ? "2px solid var(--ink)" : "none" }} />
+              ))}
+              <img src="/product_abb_sh201.png" alt="Автоматичний вимикач ABB SH201 C16" style={{ maxHeight: 290, maxWidth: "80%", objectFit: "contain" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderTop: "1px solid var(--ink)", paddingTop: 13 }}>
+              <span style={{ fontWeight: 800, fontSize: 15, letterSpacing: "-.01em" }}>ABB · SH201 C16</span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)" }}>ART 2CDS211001R0164</span>
+            </div>
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div className="card" style={{ padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between", flexGrow: 1, background: "var(--accent-tint)", borderColor: "var(--accent-soft)" }}>
-            <div>
-              <div className="u-label" style={{ color: "var(--accent)", marginBottom: 10 }}>Розпродаж складу</div>
-              <h3 style={{ fontSize: 22, marginBottom: 8 }}>Danfoss FC-51<br />−45% на частотники</h3>
-              <p style={{ fontSize: 13.5, color: "var(--ink-2)", margin: 0 }}>Поки є на складі. Обмежена партія приводів 0.37–2.2 кВт.</p>
+        {/* spec rail — інструментальна стрічка показників на всю ширину */}
+        <div className="hero-brutal-rail" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", borderTop: "1px solid var(--ink)" }}>
+          {rail.map(([n, d], i) => (
+            <div key={i} style={{ padding: "18px 24px", borderLeft: i ? "1px solid var(--line-2)" : "none" }}>
+              <div className="u-mono" style={{ fontSize: 20, fontWeight: 800, lineHeight: 1, letterSpacing: "-.01em" }}>{n}</div>
+              <div style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 7, textTransform: "uppercase", letterSpacing: ".04em" }}>{d}</div>
             </div>
-            <button className="btn btn-primary btn-sm" style={{ alignSelf: "flex-start", marginTop: 16 }} onClick={() => go("catalog")}>Дивитись →</button>
-          </div>
-          <div className="card" style={{ padding: 24, display: "flex", flexDirection: "column", justifyContent: "space-between", flexGrow: 1 }}>
-            <div>
-              <div className="u-label" style={{ marginBottom: 10 }}>Для бізнесу</div>
-              <h3 style={{ fontSize: 21, marginBottom: 8 }}>Гуртові ціни та відстрочка платежу</h3>
-              <p style={{ fontSize: 13.5, color: "var(--muted)", margin: 0 }}>Персональний менеджер, прайс під проєкт, документи з ПДВ.</p>
-            </div>
-            <button className="btn btn-ghost btn-sm" style={{ alignSelf: "flex-start", marginTop: 16 }} onClick={() => go("category")}>Стати клієнтом B2B</button>
-          </div>
+          ))}
         </div>
       </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0, marginTop: 16, border: "1px solid var(--line)", borderRadius: "var(--r-md)", background: "var(--paper)", overflow: "hidden" }} className="trust-strip">
-        {[
-          ["Складський запас", "понад 12 000 позицій у наявності"],
-          ["Відправка день-у-день", "замовлення до 16:00 — сьогодні"],
-          ["Оригінал і гарантія", "офіційні поставки, сертифікати"],
-          ["Підтримка інженера", "допомога з підбором і заміною"],
-        ].map(([t, d], i) => (
-          <div key={i} style={{ padding: "18px 22px", borderLeft: i ? "1px solid var(--line)" : "none", display: "flex", flexDirection: "column", gap: 3 }}>
-            <span style={{ fontWeight: 700, fontSize: 14 }}>{t}</span>
-            <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{d}</span>
-          </div>
-        ))}
-      </div>
+      <style>{`
+        @media (max-width: 920px) {
+          .hero-brutal-grid { grid-template-columns: 1fr !important; }
+          .hero-brutal-left { border-right: none !important; border-bottom: 1px solid var(--ink) !important; padding: 36px 24px 30px !important; }
+          .hero-brutal-right { padding: 20px !important; }
+        }
+        @media (max-width: 560px) {
+          .hero-brutal-rail { grid-template-columns: repeat(2, 1fr) !important; }
+          .hero-brutal-rail > div:nth-child(3) { border-left: none !important; }
+          .hero-brutal-rail > div:nth-child(n+3) { border-top: 1px solid var(--line-2); }
+        }
+      `}</style>
     </section>
   );
 }

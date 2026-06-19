@@ -16,7 +16,7 @@ export function FavBtn() {
   return (
     <button onClick={(e) => { e.stopPropagation(); setOn(!on); }} aria-label="В обране"
       style={{ appearance: "none", cursor: "pointer", background: on ? "var(--accent-tint)" : "var(--paper)", border: "1px solid var(--line-2)", borderRadius: "var(--r-sm)", width: 34, height: 34, display: "flex", alignItems: "center", justifyContent: "center", color: on ? "var(--accent)" : "var(--muted)", flexShrink: 0 }}>
-      <svg width="17" height="17" viewBox="0 0 24 24" fill={on ? "currentColor" : "none"}><path d="M12 20s-7-4.6-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.4 12 20 12 20Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/></svg>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill={on ? "currentColor" : "none"}><path d="M12 20s-7-4.6-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.4 12 20 12 20Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>
     </button>
   );
 }
@@ -24,17 +24,17 @@ export function FavBtn() {
 export function ProductCard({ p, go, onAdd, onQuickView, theme }) {
   const isSwiss = theme === "swiss";
   const isCarbonTech = theme === "carbon_tech";
-  
+
   if (isSwiss) {
     return (
-      <div 
-        onClick={() => go("product")} 
+      <div
+        onClick={() => go("product")}
         style={{ display: "flex", flexDirection: "column", gap: 10, cursor: "pointer", borderBottom: "2px solid var(--ink)", paddingBottom: 16 }}
       >
         <div style={{ position: "relative", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", height: 160 }}>
           <ProductGlyph type={p.glyph} size={110} />
-          <button 
-            className="btn btn-ghost btn-sm" 
+          <button
+            className="btn btn-ghost btn-sm"
             style={{ position: "absolute", bottom: 8, right: 8, height: 28, fontSize: 11, border: "1px solid var(--ink)", background: "var(--paper)" }}
             onClick={(e) => { e.stopPropagation(); onQuickView && onQuickView(p); }}
           >
@@ -61,13 +61,13 @@ export function ProductCard({ p, go, onAdd, onQuickView, theme }) {
 
   if (isCarbonTech) {
     return (
-      <div 
-        className="card lift" 
+      <div
+        className="card lift"
         onClick={() => go("product")}
-        style={{ 
-          cursor: "pointer", 
-          display: "flex", 
-          flexDirection: "column", 
+        style={{
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
           height: "100%",
           padding: 16,
           background: "var(--paper)",
@@ -88,7 +88,7 @@ export function ProductCard({ p, go, onAdd, onQuickView, theme }) {
 
         <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
           <h3 style={{ fontSize: 13.5, fontWeight: 700, lineHeight: 1.3, marginBottom: 8, height: 36, overflow: "hidden" }}>{p.name}</h3>
-          
+
           {/* Technical parameter bar tags */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
             {p.chips.slice(0, 3).map((chip, idx) => (
@@ -105,8 +105,8 @@ export function ProductCard({ p, go, onAdd, onQuickView, theme }) {
               )}
               <span className="u-mono" style={{ fontSize: 16, fontWeight: 800, color: "var(--accent)" }}>{p.price} ₴</span>
             </div>
-            <button 
-              className="btn btn-accent btn-sm" 
+            <button
+              className="btn btn-accent btn-sm"
               onClick={(e) => { e.stopPropagation(); onAdd && onAdd(); }}
               style={{ height: 32, fontSize: 11, padding: "0 10px", borderRadius: "var(--r-xs)" }}
             >
@@ -129,10 +129,12 @@ export function ProductCard({ p, go, onAdd, onQuickView, theme }) {
         </div>
         <div style={{ position: "absolute", top: 12, right: 12, zIndex: 2 }}><FavBtn /></div>
         <div className="card-img-container" style={{ height: 150, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-          <ProductGlyph type={p.glyph} size={120} />
+          {p.img
+            ? <img src={p.img} alt={p.name} style={{ maxHeight: 142, maxWidth: "100%", objectFit: "contain" }} />
+            : <ProductGlyph type={p.glyph} size={120} />}
           <div className="quick-view-btn-wrap">
-            <button className="btn btn-soft btn-sm" style={{ fontWeight: 700 }} onClick={(e) => { e.stopPropagation(); onQuickView && onQuickView(p); }}>
-              {I.search} Швидко
+            <button className="btn btn-sm quick-view-btn" onClick={(e) => { e.stopPropagation(); onQuickView && onQuickView(p); }}>
+              {I.search} Швидкий перегляд
             </button>
           </div>
         </div>
@@ -175,8 +177,8 @@ export function ProductRow({ p, go, onAdd, onQuickView, theme }) {
 
   if (isSwiss) {
     return (
-      <div 
-        onClick={() => go("product")} 
+      <div
+        onClick={() => go("product")}
         style={{ display: "flex", gap: 24, padding: "16px 0", borderBottom: "2px solid var(--ink)", cursor: "pointer", alignItems: "center" }}
       >
         <div style={{ width: 100, height: 100, background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -193,8 +195,8 @@ export function ProductRow({ p, go, onAdd, onQuickView, theme }) {
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
           <PriceBlock price={p.price} old={p.old} size={20} />
-          <button 
-            className="btn btn-primary btn-sm" 
+          <button
+            className="btn btn-primary btn-sm"
             onClick={(e) => { e.stopPropagation(); onAdd && onAdd(); }}
             style={{ height: 32, padding: "0 12px", border: "1px solid var(--ink)" }}
           >
@@ -207,9 +209,9 @@ export function ProductRow({ p, go, onAdd, onQuickView, theme }) {
 
   if (isCarbonTech) {
     return (
-      <div 
-        className="card lift" 
-        style={{ display: "flex", gap: 20, padding: 18, cursor: "pointer", alignItems: "center" }} 
+      <div
+        className="card lift"
+        style={{ display: "flex", gap: 20, padding: 18, cursor: "pointer", alignItems: "center" }}
         onClick={() => go("product")}
       >
         <div style={{ width: 100, height: 100, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", background: "var(--bg-2)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
@@ -392,6 +394,7 @@ export function ProductTable({ list, go, onAdd, onQuickView, theme }) {
               <td style={{ padding: "14px 16px", textAlign: "center", display: "flex", gap: 6, justifyContent: "center" }} onClick={(e) => e.stopPropagation()}>
                 <button className="btn btn-primary btn-sm" style={{ padding: "0 10px", height: 30 }} onClick={() => onAdd && onAdd()}>+ Купити</button>
                 <button className="btn btn-ghost btn-sm btn-icon" style={{ width: 30, height: 30 }} onClick={() => onQuickView && onQuickView(p)} title="Швидкий перегляд">{I.search}</button>
+                <button className="btn btn-ghost btn-sm btn-icon" style={{ width: 30, height: 30 }} onClick={(e) => e.stopPropagation()}>{I.heart}</button>
               </td>
             </tr>
           ))}
@@ -410,7 +413,9 @@ export function QuickViewModal({ p, onClose, onAdd }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 24, padding: "24px 16px" }} className="product-layout">
           {/* Left: Product Glyph representation */}
           <div style={{ background: "var(--bg)", borderRadius: "var(--r-md)", padding: 24, display: "flex", alignItems: "center", justifyContent: "center", minHeight: 280, border: "1px solid var(--line)" }}>
-            <ProductGlyph type={p.glyph} size={200} />
+            {p.img
+              ? <img src={p.img} alt={p.name} style={{ maxHeight: 260, maxWidth: "100%", objectFit: "contain" }} />
+              : <ProductGlyph type={p.glyph} size={200} />}
           </div>
           {/* Right: details */}
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -421,9 +426,9 @@ export function QuickViewModal({ p, onClose, onAdd }) {
               </div>
               <h3 style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.25, color: "var(--ink)" }}>{p.name}</h3>
             </div>
-            
+
             <Stars n={p.rating} reviews={p.reviews} />
-            
+
             <div style={{ borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", padding: "14px 0" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
                 <PriceBlock price={p.price} old={p.old} size={26} />
