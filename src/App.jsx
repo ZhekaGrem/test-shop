@@ -16,11 +16,37 @@ const SCREENS = [
   { id: "cart", label: "Кошик", url: "kv-electro.ua/cart" },
 ];
 
+// Набори шрифтів айдентики — перемикаються в панелі (фінальний вибір за клієнтом).
+// Кожен набір задає дисплейну гарнітуру (заголовки) і текстову (тіло).
+const FONT_SETS = {
+  unbounded_onest: {
+    label: "Unbounded + Onest",
+    display: "'Unbounded', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'Onest', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+  onest: {
+    label: "Onest (одна родина)",
+    display: "'Onest', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'Onest', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+  fixel: {
+    label: "Fixel (MacPaw)",
+    display: "'Fixel Display', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'Fixel Text', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+  e_ukraine: {
+    label: "e-Ukraine (Diia)",
+    display: "'e-UkraineHead', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'e-Ukraine', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+};
+
 const APP_DEFAULTS = {
   "accent": "#1e7a4e",
   "density": "balanced",
   "styleTheme": "hybrid",
-  "colorTheme": "default"
+  "colorTheme": "default",
+  "fontSet": "onest"
 };
 
 function Stub({ label }) {
@@ -144,7 +170,11 @@ function App() {
     faint = "#64748B";
   }
   
+  const fonts = FONT_SETS[t.fontSet] || FONT_SETS.onest;
+
   const themeVars = {
+    "--sans": fonts.sans,
+    "--display": fonts.display,
     "--accent": accColor,
     "--accent-strong": `color-mix(in srgb, ${accColor} 70%, ${ink})`,
     "--accent-strong-h": `color-mix(in srgb, ${accColor} 55%, ${ink})`,
@@ -174,7 +204,7 @@ function App() {
     Object.entries(themeVars).forEach(([k, v]) => {
       root.style.setProperty(k, v);
     });
-  }, [colTheme, t.styleTheme, accColor]);
+  }, [colTheme, t.styleTheme, accColor, t.fontSet]);
 
   return (
     <div style={themeVars} className={isSwiss ? "theme-swiss" : isCarbonTech ? "theme-carbon-tech" : "theme-hybrid"}>
@@ -222,6 +252,11 @@ function App() {
             { label: "Carbon (Dark Mode) + Неон", value: "carbon" }
           ]}
           onChange={(v) => setTweak("colorTheme", v)} />
+
+        <TweakSection label="Шрифти (айдентика)" />
+        <TweakRadio label="Набір шрифтів" value={t.fontSet}
+          options={Object.entries(FONT_SETS).map(([value, s]) => ({ value, label: s.label }))}
+          onChange={(v) => setTweak("fontSet", v)} />
 
         <TweakSection label="Акцентний колір (Custom)" />
         <TweakColor label="Колір бренду" value={t.accent}
