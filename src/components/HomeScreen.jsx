@@ -405,9 +405,16 @@ function LoadCalculatorHybrid({ onAdd }) {
                     key={opt.val}
                     className="btn"
                     onClick={() => { setPhases(opt.val); if (opt.val === 1 && power > 20) setPower(15); }}
-                    style={{ 
-                      flex: 1, 
-                      background: phases === opt.val ? "var(--accent-tint)" : "var(--bg)", 
+                    style={{
+                      flex: 1,
+                      minWidth: 0,
+                      height: "auto",
+                      minHeight: 48,
+                      padding: "10px 12px",
+                      whiteSpace: "normal",
+                      lineHeight: 1.25,
+                      textAlign: "center",
+                      background: phases === opt.val ? "var(--accent-tint)" : "var(--bg)",
                       color: phases === opt.val ? "var(--accent)" : "var(--ink)",
                       border: phases === opt.val ? "2px solid var(--accent)" : "1px solid var(--line-2)",
                       fontWeight: 700
@@ -439,7 +446,7 @@ function LoadCalculatorHybrid({ onAdd }) {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <div className="calc-selects" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 700, display: "block", marginBottom: 6 }}>Матеріал корпусу щита</label>
                 <select 
@@ -489,7 +496,7 @@ function LoadCalculatorHybrid({ onAdd }) {
               <span className="u-label" style={{ color: "var(--accent)" }}>Рекомендована специфікація</span>
               <h3 style={{ fontSize: 20, marginTop: 8, marginBottom: 16 }}>Специфікація щита введення {power} кВт</h3>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 14 }}>
+              <div className="calc-spec" style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 14 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--line-2)", paddingBottom: 8 }}>
                   <span style={{ color: "var(--muted)" }}>Ввідний автомат:</span>
                   <strong style={{ textAlign: "right" }}>{mainBreaker}</strong>
@@ -516,14 +523,15 @@ function LoadCalculatorHybrid({ onAdd }) {
             </div>
 
             <div style={{ borderTop: "2px solid var(--line-2)", paddingTop: 18, marginTop: 18 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
                 <span style={{ fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>ОРІЄНТОВНА ВАРТІСТЬ:</span>
                 <span className="u-mono" style={{ fontSize: 24, fontWeight: 800, color: "var(--accent)" }}>{price.toLocaleString()} ₴</span>
               </div>
-              <button 
-                className="btn btn-accent btn-block btn-lg" 
+              <button
+                className="btn btn-accent btn-block btn-lg"
                 onClick={handleAdd}
                 disabled={added}
+                style={{ height: "auto", minHeight: 50, padding: "12px 16px", whiteSpace: "normal", lineHeight: 1.25 }}
               >
                 {added ? "✓ РОЗРАХУНОК ДОДАНО" : "ДОДАТИ КОМПЛЕКТ У КОШИК"}
               </button>
@@ -531,6 +539,15 @@ function LoadCalculatorHybrid({ onAdd }) {
           </div>
         </div>
       </div>
+      <style>{`
+        /* spec-рядки не виходять за межі: значення переносяться, мітка не стискається */
+        .calc-spec > div > span:first-child { flex-shrink: 0; }
+        .calc-spec > div > strong,
+        .calc-spec > div > span:last-child { min-width: 0; overflow-wrap: anywhere; }
+        @media (max-width: 560px) {
+          .calc-selects { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
@@ -1311,8 +1328,8 @@ function HeroPanelHybrid({ go }) {
           {/* LEFT — editorial headline */}
           <div className="hero-brutal-left" style={{ padding: "52px 48px 44px", borderRight: "1px solid var(--ink)" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28 }}>
-              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-2)", whiteSpace: "nowrap" }}>EST. 2008 — Офіційний постачальник</span>
-              <span style={{ flexGrow: 1, height: 1, background: "var(--line-2)" }} />
+              <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-2)", minWidth: 0, overflowWrap: "anywhere" }}>EST. 2008 — Офіційний постачальник</span>
+              <span style={{ flexGrow: 1, minWidth: 16, height: 1, background: "var(--line-2)" }} />
             </div>
             <h1 style={{ fontSize: "clamp(36px, 4.8vw, 60px)", lineHeight: .98, letterSpacing: "-.03em", fontWeight: 800, textTransform: "uppercase", margin: 0 }}>
               Електро-<br />обладнання<br />для тих, хто<br />рахує <span style={{ color: "var(--accent)" }}>аптайм.</span>

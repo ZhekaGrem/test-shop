@@ -177,11 +177,11 @@ export function CartScreen({ go, cart, setCart, onAdd, onQuickView, theme }) {
               {items.map((it, i) => (
                 <CartRow key={i} item={it} qty={qtys[i]} setQty={(v) => setQ(i, v)} onRemove={() => {}} />
               ))}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 16 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, paddingTop: 16 }}>
                 <button className="btn btn-ghost btn-sm" onClick={() => go("category")}>← Продовжити покупки</button>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <div style={{ height: 38, border: "1px solid var(--line-2)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", padding: "0 12px", fontSize: 13, color: "var(--muted)", fontFamily: "var(--mono)" }}>Промокод</div>
-                  <button className="btn btn-soft btn-sm">Застосувати</button>
+                <div style={{ display: "flex", gap: 8, flexGrow: 1, justifyContent: "flex-end", minWidth: 0 }}>
+                  <div style={{ height: 38, border: "1px solid var(--line-2)", borderRadius: "var(--r-sm)", display: "flex", alignItems: "center", padding: "0 12px", fontSize: 13, color: "var(--muted)", fontFamily: "var(--mono)", flexGrow: 1, minWidth: 0, maxWidth: 200 }}>Промокод</div>
+                  <button className="btn btn-soft btn-sm" style={{ flexShrink: 0 }}>Застосувати</button>
                 </div>
               </div>
             </div>

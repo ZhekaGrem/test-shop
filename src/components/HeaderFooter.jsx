@@ -12,7 +12,7 @@ export function SiteHeader({ go, screen, cartCount = 3 }) {
         <div className="wrap" style={{ display: "flex", alignItems: "stretch", height: 80, padding: "0 28px" }}>
           {/* logo lockup — geometric mark + uppercase tracked wordmark */}
           <a onClick={() => go("home")} style={{ display: "flex", alignItems: "center", gap: 13, cursor: "pointer", flexShrink: 0, paddingRight: 26, borderRight: "1px solid var(--line)" }}>
-            <img src="/logo.webp" alt="kv-electro" width={40} height={40} style={{ borderRadius: 0, display: "block" }} />
+            <img src="/logo.webp" alt="kv-electro" width={60} height={60} style={{ borderRadius: 0, display: "block" }} />
             <span style={{ display: "flex", flexDirection: "column", gap: 4, lineHeight: 1 }}>
               <span style={{ fontWeight: 800, fontSize: 17, letterSpacing: ".11em", textTransform: "uppercase" }}>KV·ELECTRO</span>
               <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--muted)", letterSpacing: ".2em", textTransform: "uppercase" }}>Електрообладнання</span>
@@ -136,31 +136,81 @@ export function MobileBottomNav({ go, screen, cartCount = 3 }) {
 }
 
 export function SiteFooter({ go }) {
+  const LINE = "#4A4F55"; // видимі grid-лінії (бриф)
+  const colTitle = { fontFamily: "var(--mono)", fontSize: 11, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--on-dark-muted)", marginBottom: 22, display: "block" };
+  const linkStyle = { display: "block", padding: "8px 0", fontSize: 14, color: "var(--on-dark)", cursor: "pointer" };
+
+  const catalogLinks = [
+    "Модульне обладнання", "Привідна техніка", "Промислові автомати", "Шафи та кліматизація", "Аналізатори електроенергії",
+  ];
+  const companyLinks = [
+    "Про компанію", "Доставка та оплата", "Гарантія та сервіс", "Збірка електрощитів", "Контакти",
+  ];
+
   return (
-    <footer style={{ background: "var(--ink-surface)", color: "var(--on-dark)", marginTop: 8 }}>
-      <div className="wrap" style={{ padding: "30px 28px 24px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
-          <a onClick={() => go("home")} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
-            <img src="/logo.webp" alt="kv-electro" width={36} height={36} style={{ borderRadius: "var(--r-sm)", display: "block" }} />
-            <span style={{ fontWeight: 800, fontSize: 16 }}>kv-electro</span>
-          </a>
-          <div style={{ display: "flex", gap: 24, fontSize: 13.5, color: "var(--on-dark-muted)" }}>
-            <a onClick={() => go("category")} style={{ cursor: "pointer" }} className="foot-link">Каталог</a>
-            <a onClick={() => go("catalog")} style={{ cursor: "pointer" }} className="foot-link">Пошук</a>
-            <a onClick={() => go("cart")} style={{ cursor: "pointer" }} className="foot-link">Кошик</a>
+    <footer style={{ background: "var(--ink-surface)", color: "var(--on-dark)", marginTop: 64, borderTop: `1px solid ${LINE}` }}>
+      <div className="wrap">
+        <div className="footer-cols" style={{ display: "grid", gridTemplateColumns: "1.7fr 1fr 1fr 1.35fr" }}>
+          {/* brand — геометрична марка без білого боксу */}
+          <div className="footer-brand" style={{ padding: "46px 40px 46px 0", borderRight: `1px solid ${LINE}` }}>
+             <a onClick={() => go("home")} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
+          <img src="/logo-footer.png" alt="kv-electro" width={55} height={55} style={{ borderRadius: "var(--r-sm)", display: "block" }} />
+          <span style={{ fontWeight: 800, fontSize: 16 }}>kv·electro</span>
+             
+            </a>
+            <p style={{ fontSize: 13.5, color: "var(--on-dark-muted)", lineHeight: 1.6, margin: "24px 0 0", maxWidth: 320 }}>
+              Офіційний постачальник модульного та промислового електрообладнання з 2008 року. Підбір, збірка та випробування щитів.
+            </p>
           </div>
-          <div style={{ fontSize: 13, color: "var(--on-dark-muted)" }}>
-            0 800 000 000 · order@kv-electro.ua
+
+          {/* nav — Каталог */}
+          <div style={{ padding: "46px 32px", borderRight: `1px solid ${LINE}` }}>
+            <span style={colTitle}>Каталог</span>
+            {catalogLinks.map((l) => (
+              <a key={l} onClick={() => go("category")} className="foot-link" style={linkStyle}>{l}</a>
+            ))}
+          </div>
+
+          {/* nav — Компанія */}
+          <div style={{ padding: "46px 32px", borderRight: `1px solid ${LINE}` }}>
+            <span style={colTitle}>Компанія</span>
+            {companyLinks.map((l) => (
+              <a key={l} className="foot-link" style={linkStyle}>{l}</a>
+            ))}
+          </div>
+
+          {/* contacts — великий моноширинний телефон + email */}
+          <div style={{ padding: "46px 0 46px 36px" }}>
+            <span style={colTitle}>Зв'язок</span>
+            <a href="tel:0800000000" className="u-mono" style={{ display: "block", fontSize: 24, fontWeight: 700, letterSpacing: "-.01em", color: "var(--on-dark)", whiteSpace: "nowrap" }}>0 800 000 000</a>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 10, color: "var(--on-dark-muted)", letterSpacing: ".1em", textTransform: "uppercase", display: "block", marginTop: 8 }}>безкоштовно по Україні</span>
+            <a href="mailto:order@kv-electro.ua" className="foot-link u-mono" style={{ display: "block", fontSize: 14, color: "var(--on-dark)", marginTop: 22, cursor: "pointer" }}>order@kv-electro.ua</a>
+            <span style={{ fontSize: 13, color: "var(--on-dark-muted)", display: "block", marginTop: 14, lineHeight: 1.5 }}>Київ, вул. Глибочицька, 17<br />Пн–Пт · 09:00–18:00</span>
           </div>
         </div>
-        <div style={{ height: 1, background: "var(--line-dark)", margin: "20px 0 14px" }} />
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 12, color: "var(--on-dark-muted)" }}>
-          <span>© 2026 kv-electro · ТОВ «КВ Електро»</span>
-          <span style={{ display: "flex", gap: 18 }}>
-            <a style={{ cursor: "pointer" }} className="foot-link">Політика конфіденційності</a>
+
+        {/* bottom — full-width line + копірайт ВЕРСАЛОМ */}
+        <div style={{ borderTop: `1px solid ${LINE}`, padding: "22px 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+          <span style={{ fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--on-dark-muted)" }}>© 2026 KV·ELECTRO — ТОВ «КВ ЕЛЕКТРО»</span>
+          <span style={{ display: "flex", gap: 26 }}>
+            <a className="foot-link" style={{ fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--on-dark-muted)", cursor: "pointer" }}>Політика конфіденційності</a>
+            <a className="foot-link" style={{ fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--on-dark-muted)", cursor: "pointer" }}>Публічна оферта</a>
           </span>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 980px) {
+          .footer-cols { grid-template-columns: 1fr 1fr !important; }
+          .footer-cols > div { border-right: none !important; border-bottom: 1px solid ${LINE}; padding: 36px 0 !important; }
+          .footer-cols > div + div { padding-left: 32px !important; border-left: 1px solid ${LINE}; }
+          .footer-brand { grid-column: 1 / -1; border-left: none !important; padding-left: 0 !important; }
+        }
+        @media (max-width: 560px) {
+          .footer-cols { grid-template-columns: 1fr !important; }
+          .footer-cols > div + div { padding-left: 0 !important; border-left: none !important; }
+        }
+      `}</style>
     </footer>
   );
 }
