@@ -1263,10 +1263,9 @@ function HeroPanelHybrid({ go }) {
     <section className="wrap" style={{ paddingTop: 30, paddingBottom: 8 }}>
       <div style={{ display: "grid", gridTemplateColumns: "1.55fr 1fr", gap: 16 }} className="hero-grid">
         <div style={{ position: "relative", background: "var(--ink-surface)", color: "var(--on-dark)", borderRadius: "var(--r-lg)", overflow: "hidden", minHeight: 380, display: "flex" }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,.04) 39px 40px), repeating-linear-gradient(0deg, transparent 0 39px, rgba(255,255,255,.04) 39px 40px)", pointerEvents: "none" }} />
           <div style={{ position: "relative", padding: "40px 48px", display: "flex", flexDirection: "column", justifyContent: "center", maxWidth: 560, zIndex: 5 }}>
             <div className="u-label" style={{ color: "var(--accent)", marginBottom: 18 }}>Офіційний постачальник · 2008</div>
-            <h1 style={{ fontSize: 40, lineHeight: 1.05, letterSpacing: "-.025em", fontWeight: 800, marginBottom: 18 }}>
+            <h1 style={{ fontSize: 48, lineHeight: 1.02, letterSpacing: "-.03em", fontWeight: 800, marginBottom: 18 }}>
               Електрообладнання<br />для тих, хто рахує<br /><span style={{ color: "var(--accent)" }}>аптайм.</span>
             </h1>
             <p style={{ fontSize: 14.5, color: "var(--on-dark-muted)", lineHeight: 1.6, marginBottom: 28, maxWidth: 420 }}>
