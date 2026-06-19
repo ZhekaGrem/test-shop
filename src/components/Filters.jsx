@@ -8,7 +8,6 @@ export function Check({ label, count, on }) {
         {c && <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="m5 12 5 5 9-10" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>}
       </span>
       <span style={{ fontSize: 13.5, color: "var(--ink-2)", flexGrow: 1 }}>{label}</span>
-      {count != null && <span className="u-mono" style={{ fontSize: 11, color: "var(--faint)" }}>{count}</span>}
     </label>
   );
 }
@@ -94,8 +93,8 @@ export function FilterContents({ onApply }) {
 
 export function FilterSidebar() {
   return (
-    <aside style={{ width: 256, flexShrink: 0 }} className="filter-sidebar">
-      <div className="card" style={{ padding: "16px 18px", position: "sticky", top: 96 }}>
+    <aside style={{ width: 240, flexShrink: 0 }} className="filter-sidebar">
+      <div style={{ position: "sticky", top: 96 }}>
         <FilterContents />
       </div>
     </aside>
