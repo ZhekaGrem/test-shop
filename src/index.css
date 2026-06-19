@@ -316,6 +316,16 @@ a { color: inherit; text-decoration: none; }
 .btn-block { width: 100%; }
 .btn-icon { width: 44px; padding: 0; }
 
+/* Акцент кнопок — режим «зелені»: міняємо місцями зелений і чорний на ВСІХ кнопках.
+   Темні дії стають зеленими, зелені — чорними (класи + інлайн-кнопки через swap-*). */
+.buy-green .btn-primary { background: var(--accent); color: #fff; }
+.buy-green .btn-primary:hover { background: var(--accent-strong-h); }
+.buy-green .btn-accent { background: var(--ink); color: var(--on-dark); }
+.buy-green .btn-accent:hover { background: #25282f; }
+/* інлайн-кнопки (хедер, hero) — !important перебиває інлайн-стиль і JS-ховери */
+.buy-green .swap-ink { background: var(--accent) !important; color: #fff !important; }
+.buy-green .swap-accent { background: var(--ink) !important; color: var(--on-dark) !important; }
+
 /* ---------- chips / pills / badges ---------- */
 .chip {
   display: inline-flex; align-items: center; gap: 6px;

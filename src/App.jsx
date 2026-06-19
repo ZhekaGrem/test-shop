@@ -6,7 +6,16 @@ import { CatalogScreen } from './components/CatalogScreen';
 import { ProductScreen } from './components/ProductScreen';
 import { CartScreen } from './components/CartScreen';
 import { QuickViewModal } from './components/ProductCards';
-import { useTweaks, TweaksPanel, TweakSection, TweakRadio } from './components/TweaksPanel';
+import { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakColor } from './components/TweaksPanel';
+
+// Відтінки зеленого для тесту — клієнт обирає фінальний (перший = поточний Schneider).
+const ACCENT_GREENS = [
+  "#3DCD58", // Schneider — яскравий весняний (поточний)
+  "#22C55E", // Соковитий трав'яний
+  "#16A34A", // Глибокий смарагдовий (кращий контраст білого тексту)
+  "#10B981", // М'ятно-бірюзовий (tech)
+  "#84CC16", // Лаймовий «електричний»
+];
 
 const SCREENS = [
   { id: "home", label: "Головна", url: "kv-electro.ua" },
@@ -46,7 +55,8 @@ const APP_DEFAULTS = {
   "density": "balanced",
   "styleTheme": "hybrid",
   "colorTheme": "schneider",
-  "fontSet": "onest"
+  "fontSet": "onest",
+  "buyEmphasis": "dark"
 };
 
 function Stub({ label }) {
@@ -219,7 +229,7 @@ function App() {
   }, [colTheme, t.styleTheme, accColor, t.fontSet]);
 
   return (
-    <div style={themeVars} className={isSwiss ? "theme-swiss" : isCarbonTech ? "theme-carbon-tech" : "theme-hybrid"}>
+    <div style={themeVars} className={(isSwiss ? "theme-swiss" : isCarbonTech ? "theme-carbon-tech" : "theme-hybrid") + (t.buyEmphasis === "green" ? " buy-green" : "")}>
       {/* the actual site */}
       <div className="stage" style={{ fontSize: `${15 * dens}px` }}>
         <SiteHeader go={go} screen={screen} cartCount={cart} />
@@ -246,6 +256,16 @@ function App() {
       )}
 
       <TweaksPanel>
+        <TweakSection label="Колір акценту (тест)" />
+        <TweakColor label="Зелений" value={t.accent}
+          options={ACCENT_GREENS}
+          onChange={(v) => setTweak("accent", v)} />
+
+        <TweakSection label="Акцент кнопок (як хоче клієнт)" />
+        <TweakRadio label="Кнопки «Купити»" value={t.buyEmphasis}
+          options={[{ value: "dark", label: "Чорні" }, { value: "green", label: "Зелені" }]}
+          onChange={(v) => setTweak("buyEmphasis", v)} />
+
         <TweakSection label="Шрифти (айдентика)" />
         <TweakRadio label="Набір шрифтів" value={t.fontSet}
           options={Object.entries(FONT_SETS).map(([value, s]) => ({ value, label: s.label }))}
