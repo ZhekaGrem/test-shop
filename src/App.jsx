@@ -42,10 +42,10 @@ const FONT_SETS = {
 };
 
 const APP_DEFAULTS = {
-  "accent": "#1e7a4e",
+  "accent": "#3DCD58",
   "density": "balanced",
   "styleTheme": "hybrid",
-  "colorTheme": "default",
+  "colorTheme": "schneider",
   "fontSet": "onest"
 };
 
@@ -168,8 +168,20 @@ function App() {
     accColor = "#10B981";
     muted = "#94A3B8";
     faint = "#64748B";
+  } else if (colTheme === "schneider") {
+    ink = "#1B1D1F";
+    ink2 = "#4A4F55";
+    paper = "#ffffff";
+    bg = isCarbonTech ? "#0c0d12" : "#ffffff";
+    bg2 = isCarbonTech ? "#1c1e27" : "#F4F4F5";
+    line = isCarbonTech ? "#232631" : "#ECEAE4";
+    line2 = isCarbonTech ? "#343949" : "#DCD9D2";
+    inkSurface = "#17181A";
+    accColor = t.accent || "#3DCD58";
+    muted = "#7C828A";
+    faint = "#A9AEB5";
   }
-  
+
   const fonts = FONT_SETS[t.fontSet] || FONT_SETS.onest;
 
   const themeVars = {

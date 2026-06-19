@@ -214,13 +214,13 @@ html, body { margin: 0; padding: 0; }
 :root {
   /* surfaces */
   --paper: #ffffff;
-  --bg: #f4f3ef;
-  --bg-2: #eceae3;
+  --bg: #ffffff;
+  --bg-2: #f4f4f5;
   --ink-surface: #15171c;
 
   /* ink / text */
-  --ink: #15171c;
-  --ink-2: #3c414a;
+  --ink: #1b1d1f;
+  --ink-2: #4a4f55;
   --muted: #80868f;
   --faint: #aeb2b8;
   --on-dark: #f3f2ee;
@@ -231,13 +231,13 @@ html, body { margin: 0; padding: 0; }
   --line-2: #d6d2c8;
   --line-dark: #2b2e35;
 
-  /* accent — forest green */
-  --accent: #1e7a4e;
-  --accent-strong: #165e3c99;
-  --accent-strong-h: #115030;
-  --accent-soft: #d4ece1;
-  --accent-tint: #edf7f1;
-  --accent-ink: #08231a;
+  /* accent — Schneider vivid green */
+  --accent: #3dcd58;
+  --accent-strong: #1f9c3c;
+  --accent-strong-h: #1a8a34;
+  --accent-soft: #c8efce;
+  --accent-tint: #eafaee;
+  --accent-ink: #0c2f15;
 
   /* status */
   --ok: #2f7d52;
