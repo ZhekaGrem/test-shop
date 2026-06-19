@@ -6,7 +6,7 @@ import { CatalogScreen } from './components/CatalogScreen';
 import { ProductScreen } from './components/ProductScreen';
 import { CartScreen } from './components/CartScreen';
 import { QuickViewModal } from './components/ProductCards';
-import { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakColor } from './components/TweaksPanel';
+import { useTweaks, TweaksPanel, TweakSection, TweakRadio } from './components/TweaksPanel';
 
 const SCREENS = [
   { id: "home", label: "Головна", url: "kv-electro.ua" },
@@ -246,36 +246,11 @@ function App() {
       )}
 
       <TweaksPanel>
-        <TweakSection label="Концепція дизайну" />
-        <TweakRadio label="Стиль інтерфейсу" value={t.styleTheme}
-          options={[
-            { label: "Гібрид Тех-Прецизійність", value: "hybrid" },
-            { label: "Швейцарський мінімалізм", value: "swiss" },
-            { label: "Carbon Tech Дашборд", value: "carbon_tech" }
-          ]}
-          onChange={(v) => setTweak("styleTheme", v)} />
-        
-        <TweakSection label="Колірна схема" />
-        <TweakRadio label="Варіант палітри" value={t.colorTheme}
-          options={[
-            { label: "За замовчуванням", value: "default" },
-            { label: "Графіт + Slate + Зелений", value: "graphite" },
-            { label: "Navy + Білий + Помаранчевий", value: "navy" },
-            { label: "Carbon (Dark Mode) + Неон", value: "carbon" }
-          ]}
-          onChange={(v) => setTweak("colorTheme", v)} />
-
         <TweakSection label="Шрифти (айдентика)" />
         <TweakRadio label="Набір шрифтів" value={t.fontSet}
           options={Object.entries(FONT_SETS).map(([value, s]) => ({ value, label: s.label }))}
           onChange={(v) => setTweak("fontSet", v)} />
 
-        <TweakSection label="Акцентний колір (Custom)" />
-        <TweakColor label="Колір бренду" value={t.accent}
-          options={["#1e7a4e", "#15603c", "#1f5fb0", "#7a4e1e", "#b23a26", "#15171c", "#f97316", "#0f766e", "#2563EB"]}
-          disabled={t.colorTheme !== "default"}
-          onChange={(v) => setTweak("accent", v)} />
-          
         <TweakSection label="Щільність" />
         <TweakRadio label="Інтерфейс" value={t.density}
           options={[{ label: "Компактний", value: "compact" }, { label: "Збалансований", value: "balanced" }, { label: "Просторий", value: "airy" }]}
