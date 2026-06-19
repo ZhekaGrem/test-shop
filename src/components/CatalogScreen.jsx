@@ -4,7 +4,7 @@ import { Crumbs } from './Common';
 import { ProductCard, ProductRow, ProductTable } from './ProductCards';
 import { FilterSidebar, FilterContents, SortBar, Pagination } from './Filters';
 
-export function CatalogScreen({ go, onAdd, onQuickView }) {
+export function CatalogScreen({ go, onAdd, onQuickView, theme }) {
   const [view, setView] = useState("table"); // Default to B2B spreadsheet table view!
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const list = [...PRODUCTS, ...PRODUCTS].slice(0, 8);

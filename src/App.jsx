@@ -6,7 +6,7 @@ import { CatalogScreen } from './components/CatalogScreen';
 import { ProductScreen } from './components/ProductScreen';
 import { CartScreen } from './components/CartScreen';
 import { QuickViewModal } from './components/ProductCards';
-import { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakColor } from './components/TweaksPanel';
+import { useTweaks, TweaksPanel, TweakSection, TweakRadio } from './components/TweaksPanel';
 
 const SCREENS = [
   { id: "home", label: "Головна", url: "kv-electro.ua" },
@@ -16,11 +16,37 @@ const SCREENS = [
   { id: "cart", label: "Кошик", url: "kv-electro.ua/cart" },
 ];
 
+// Набори шрифтів айдентики — перемикаються в панелі (фінальний вибір за клієнтом).
+// Кожен набір задає дисплейну гарнітуру (заголовки) і текстову (тіло).
+const FONT_SETS = {
+  unbounded_onest: {
+    label: "Unbounded + Onest",
+    display: "'Unbounded', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'Onest', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+  onest: {
+    label: "Onest (одна родина)",
+    display: "'Onest', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'Onest', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+  fixel: {
+    label: "Fixel (MacPaw)",
+    display: "'Fixel Display', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'Fixel Text', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+  e_ukraine: {
+    label: "e-Ukraine (Diia)",
+    display: "'e-UkraineHead', ui-sans-serif, system-ui, -apple-system, sans-serif",
+    sans: "'e-Ukraine', ui-sans-serif, system-ui, -apple-system, sans-serif",
+  },
+};
+
 const APP_DEFAULTS = {
-  "accent": "#1e7a4e",
+  "accent": "#3DCD58",
   "density": "balanced",
   "styleTheme": "hybrid",
-  "colorTheme": "default"
+  "colorTheme": "schneider",
+  "fontSet": "onest"
 };
 
 function Stub({ label }) {
@@ -142,9 +168,25 @@ function App() {
     accColor = "#10B981";
     muted = "#94A3B8";
     faint = "#64748B";
+  } else if (colTheme === "schneider") {
+    ink = "#1B1D1F";
+    ink2 = "#4A4F55";
+    paper = "#ffffff";
+    bg = isCarbonTech ? "#0c0d12" : "#ffffff";
+    bg2 = isCarbonTech ? "#1c1e27" : "#F4F4F5";
+    line = isCarbonTech ? "#232631" : "#ECEAE4";
+    line2 = isCarbonTech ? "#343949" : "#DCD9D2";
+    inkSurface = "#17181A";
+    accColor = t.accent || "#3DCD58";
+    muted = "#7C828A";
+    faint = "#A9AEB5";
   }
-  
+
+  const fonts = FONT_SETS[t.fontSet] || FONT_SETS.onest;
+
   const themeVars = {
+    "--sans": fonts.sans,
+    "--display": fonts.display,
     "--accent": accColor,
     "--accent-strong": `color-mix(in srgb, ${accColor} 70%, ${ink})`,
     "--accent-strong-h": `color-mix(in srgb, ${accColor} 55%, ${ink})`,
@@ -174,7 +216,7 @@ function App() {
     Object.entries(themeVars).forEach(([k, v]) => {
       root.style.setProperty(k, v);
     });
-  }, [colTheme, t.styleTheme, accColor]);
+  }, [colTheme, t.styleTheme, accColor, t.fontSet]);
 
   return (
     <div style={themeVars} className={isSwiss ? "theme-swiss" : isCarbonTech ? "theme-carbon-tech" : "theme-hybrid"}>
@@ -204,31 +246,11 @@ function App() {
       )}
 
       <TweaksPanel>
-        <TweakSection label="Концепція дизайну" />
-        <TweakRadio label="Стиль інтерфейсу" value={t.styleTheme}
-          options={[
-            { label: "Гібрид Тех-Прецизійність", value: "hybrid" },
-            { label: "Швейцарський мінімалізм", value: "swiss" },
-            { label: "Carbon Tech Дашборд", value: "carbon_tech" }
-          ]}
-          onChange={(v) => setTweak("styleTheme", v)} />
-        
-        <TweakSection label="Колірна схема" />
-        <TweakRadio label="Варіант палітри" value={t.colorTheme}
-          options={[
-            { label: "За замовчуванням", value: "default" },
-            { label: "Графіт + Slate + Зелений", value: "graphite" },
-            { label: "Navy + Білий + Помаранчевий", value: "navy" },
-            { label: "Carbon (Dark Mode) + Неон", value: "carbon" }
-          ]}
-          onChange={(v) => setTweak("colorTheme", v)} />
+        <TweakSection label="Шрифти (айдентика)" />
+        <TweakRadio label="Набір шрифтів" value={t.fontSet}
+          options={Object.entries(FONT_SETS).map(([value, s]) => ({ value, label: s.label }))}
+          onChange={(v) => setTweak("fontSet", v)} />
 
-        <TweakSection label="Акцентний колір (Custom)" />
-        <TweakColor label="Колір бренду" value={t.accent}
-          options={["#1e7a4e", "#15603c", "#1f5fb0", "#7a4e1e", "#b23a26", "#15171c", "#f97316", "#0f766e", "#2563EB"]}
-          disabled={t.colorTheme !== "default"}
-          onChange={(v) => setTweak("accent", v)} />
-          
         <TweakSection label="Щільність" />
         <TweakRadio label="Інтерфейс" value={t.density}
           options={[{ label: "Компактний", value: "compact" }, { label: "Збалансований", value: "balanced" }, { label: "Просторий", value: "airy" }]}
