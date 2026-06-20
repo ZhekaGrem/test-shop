@@ -7,6 +7,7 @@ import { ProductScreen } from './components/ProductScreen';
 import { CartScreen } from './components/CartScreen';
 import { QuickViewModal } from './components/ProductCards';
 import { useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakColor } from './components/TweaksPanel';
+import { PrimitivesReference } from './components/PrimitivesReference';
 
 // Відтінки зеленого для тесту — клієнт обирає фінальний (перший = поточний Schneider).
 const ACCENT_GREENS = [
@@ -23,6 +24,7 @@ const SCREENS = [
   { id: "catalog", label: "Каталог · пошук", url: "kv-electro.ua/search?q=ABB+16A" },
   { id: "product", label: "Товар", url: "kv-electro.ua/avtomat-abb-sh201-c16" },
   { id: "cart", label: "Кошик", url: "kv-electro.ua/cart" },
+  { id: "style", label: "Стиль", url: "kv-electro.ua/style" },
 ];
 
 // Набори шрифтів айдентики — перемикаються в панелі (фінальний вибір за клієнтом).
@@ -112,6 +114,7 @@ function App() {
   else if (screen === "catalog") body = <CatalogScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
   else if (screen === "product") body = <ProductScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
   else if (screen === "cart") body = <CartScreen go={go} cart={cart} setCart={setCart} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
+  else if (screen === "style") body = <PrimitivesReference />;
   else body = <Stub label={meta.label} />;
 
   let ink = "#1B1D1F", ink2 = "#4A4F55", paper = "#ffffff";
