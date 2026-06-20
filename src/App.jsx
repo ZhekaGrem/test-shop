@@ -55,7 +55,7 @@ const APP_DEFAULTS = {
   "density": "balanced",
   "theme": "light",
   "fontSet": "onest",
-  "buyEmphasis": "dark"
+  "accentPreset": "money_structure"
 };
 
 function Stub({ label }) {
@@ -166,7 +166,7 @@ function App() {
   }, [t.theme, accColor, t.fontSet]);
 
   return (
-    <div style={themeVars} className={"theme-hybrid" + (t.buyEmphasis === "green" ? " buy-green" : "")}>
+    <div style={themeVars} className={"theme-hybrid" + (t.accentPreset === "buy_only" ? " accent-buy-only" : " accent-money-structure")}>
       {/* the actual site */}
       <div className="stage" style={{ fontSize: `${15 * dens}px` }}>
         <SiteHeader go={go} screen={screen} cartCount={cart} />
@@ -203,10 +203,13 @@ function App() {
           options={ACCENT_GREENS}
           onChange={(v) => setTweak("accent", v)} />
 
-        <TweakSection label="Акцент кнопок (як хоче клієнт)" />
-        <TweakRadio label="Кнопки «Купити»" value={t.buyEmphasis}
-          options={[{ value: "dark", label: "Чорні" }, { value: "green", label: "Зелені" }]}
-          onChange={(v) => setTweak("buyEmphasis", v)} />
+        <TweakSection label="Акцент: зелений ↔ чорний" />
+        <TweakRadio label="Пресет" value={t.accentPreset}
+          options={[
+            { value: "money_structure", label: "Гроші/структура" },
+            { value: "buy_only", label: "Тільки Купити" },
+          ]}
+          onChange={(v) => setTweak("accentPreset", v)} />
 
         <TweakSection label="Шрифти (айдентика)" />
         <TweakRadio label="Набір шрифтів" value={t.fontSet}
