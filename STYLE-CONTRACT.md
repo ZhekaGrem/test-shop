@@ -50,18 +50,22 @@ Both must render correctly. Never invent a third mapping or a new green.
 
 ## Locked primitives
 CSS-class + component primitives. Compose these; do not hand-roll raw markup.
-- Buttons: `.btn` + `.btn-primary` (green, dark text) / `.btn-dark` /
-  `.btn-ghost`, sizes `.btn-sm`.
-- `.card` — white, `--r-lg`, `--line` border, no heavy shadow.
+- Buttons: `.btn` + `.btn-primary` (dark text) / `.btn-accent` (green) /
+  `.btn-ghost` / `.btn-soft`, sizes `.btn-sm` / `.btn-lg` / `.btn-icon`.
+- `.card` — white, `--r-md`, `--line` border, no heavy shadow.
 - Hero band — soft-black `--ink-surface`, big sentence-case headline, green
   eyebrow, green CTA.
-- `.u-label` — small UPPERCASE eyebrow (tracking 0.16em).
-- `ProductCard` (src/components/ProductCards.jsx) — clean, big title, mono SKU,
-  price/button per accent preset.
+- `.u-label` — small UPPERCASE eyebrow (tracking 0.14em).
+- `.u-mono` — IBM Plex Mono typeface utilities.
+- `ProductCard`, `PriceBlock` (src/components/ProductCards.jsx) — clean, big
+  title, mono SKU, price/button per accent preset.
 - Filter sidebar — light: collapsed groups, no heavy frames/backgrounds/counts.
-- `Money`, `Stock`, `Stars`, `SectionHead`, `Crumbs` (src/components/Common.jsx).
-- SKU/spec text — `.u-mono` (IBM Plex Mono).
-- `TechLine` — thin semi-transparent divider.
+- `Money`, `Stock`, `Stars`, `SectionHead`, `Crumbs`, `ProductGlyph`,
+  `HeaderIcon` (src/components/Common.jsx).
+- Badges & status: `.badge-new` (ink), `.badge-hit` (accent), `.badge-sale`
+  (sale red); `.stock` (in-stock or order indicator).
+- `.chip` (inline pills) — `.chip-line` / `.chip-accent` variants.
+- Thin divider — `.hairline` (1px, `--line` color).
 
 Live reference of every primitive under switchable tokens: `/style` screen
 (PrimitivesReference.jsx).
