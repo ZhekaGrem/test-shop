@@ -319,11 +319,9 @@ a { color: inherit; text-decoration: none; }
 /* ---------- accent presets ---------- */
 /* Preset A — money_structure: green = Buy CTA + badge-hit; ink = eyebrow accents */
 /* (badge-new already uses --ink; no price-accent or tab.is-active class exists) */
-.accent-money-structure .badge-new,
 .accent-money-structure .u-label { color: var(--ink); }
 
 /* Preset B — buy_only: green = ONLY the Buy CTA (.btn-accent); everything else → ink */
-.accent-buy-only .badge-new,
 .accent-buy-only .badge-hit,
 .accent-buy-only .u-label { color: var(--ink); }
 .accent-buy-only .badge-hit { background: var(--ink); color: var(--on-dark); }

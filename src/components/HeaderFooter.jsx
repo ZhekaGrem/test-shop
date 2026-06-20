@@ -20,14 +20,14 @@ export function SiteHeader({ go, screen, cartCount = 3 }) {
           </a>
 
           {/* catalog — sharp charcoal block */}
-          <button className="swap-ink" onClick={() => go("category")} style={{ appearance: "none", cursor: "pointer", border: "none", background: "var(--ink)", color: "var(--on-dark)", display: "inline-flex", alignItems: "center", gap: 9, padding: "0 22px", margin: "17px 22px 17px 26px", height: 46, borderRadius: 0, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 13, letterSpacing: ".08em", textTransform: "uppercase", flexShrink: 0, transition: "background .15s" }} onMouseEnter={(e) => (e.currentTarget.style.background = "#000")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--ink)")}>
+          <button onClick={() => go("category")} style={{ appearance: "none", cursor: "pointer", border: "none", background: "var(--ink)", color: "var(--on-dark)", display: "inline-flex", alignItems: "center", gap: 9, padding: "0 22px", margin: "17px 22px 17px 26px", height: 46, borderRadius: 0, fontFamily: "var(--sans)", fontWeight: 700, fontSize: 13, letterSpacing: ".08em", textTransform: "uppercase", flexShrink: 0, transition: "background .15s" }} onMouseEnter={(e) => (e.currentTarget.style.background = "#000")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--ink)")}>
             {I.menu} Каталог
           </button>
 
           {/* search — rigid harsh border + green square action button with charcoal icon */}
           <div onClick={() => go("catalog")} style={{ flexGrow: 1, alignSelf: "center", display: "flex", height: 46, border: "1px solid var(--ink)", borderRadius: 0, background: "var(--paper)", cursor: "pointer" }}>
             <input placeholder="Пошук за назвою або артикулом…" readOnly style={{ flexGrow: 1, border: "none", outline: "none", padding: "0 16px", fontFamily: "var(--sans)", fontSize: 13.5, background: "transparent", cursor: "pointer", color: "var(--ink)" }} />
-            <button className="swap-accent" aria-label="Пошук" style={{ appearance: "none", cursor: "pointer", border: "none", borderLeft: "1px solid var(--ink)", background: "var(--accent)", color: "var(--ink)", width: 52, height: "100%", borderRadius: 0, display: "flex", alignItems: "center", justifyContent: "center", transition: "background .15s" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--accent-strong)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}>{I.search}</button>
+            <button aria-label="Пошук" style={{ appearance: "none", cursor: "pointer", border: "none", borderLeft: "1px solid var(--ink)", background: "var(--accent)", color: "var(--ink)", width: 52, height: "100%", borderRadius: 0, display: "flex", alignItems: "center", justifyContent: "center", transition: "background .15s" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--accent-strong)")} onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}>{I.search}</button>
           </div>
 
           {/* phone — strict monospace */}
