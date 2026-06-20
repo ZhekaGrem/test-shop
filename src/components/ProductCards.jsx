@@ -21,43 +21,7 @@ export function FavBtn() {
   );
 }
 
-export function ProductCard({ p, go, onAdd, onQuickView, theme }) {
-  const isSwiss = theme === "swiss";
-
-  if (isSwiss) {
-    return (
-      <div
-        onClick={() => go("product")}
-        style={{ display: "flex", flexDirection: "column", gap: 10, cursor: "pointer", borderBottom: "2px solid var(--ink)", paddingBottom: 16 }}
-      >
-        <div style={{ position: "relative", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", height: 160 }}>
-          <ProductGlyph type={p.glyph} size={110} />
-          <button
-            className="btn btn-ghost btn-sm"
-            style={{ position: "absolute", bottom: 8, right: 8, height: 28, fontSize: 11, border: "1px solid var(--ink)", background: "var(--paper)" }}
-            onClick={(e) => { e.stopPropagation(); onQuickView && onQuickView(p); }}
-          >
-            Огляд
-          </button>
-        </div>
-        <div>
-          <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted)", fontWeight: 700, marginBottom: 2 }}>
-            {p.brand}
-          </div>
-          <a style={{ fontSize: 15, fontWeight: 800, color: "var(--ink)", lineHeight: 1.25, display: "block", minHeight: 38 }}>
-            {p.name}
-          </a>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 8 }}>
-            <PriceBlock price={p.price} old={p.old} size={18} />
-            <span style={{ fontSize: 11, color: p.stock === 'in' ? 'var(--ok)' : 'var(--warn)', fontWeight: 700, textTransform: "uppercase" }}>
-              {p.stock === 'in' ? 'В наявності' : 'Замовлення'}
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+export function ProductCard({ p, go, onAdd, onQuickView }) {
   return (
     <div className="card lift" style={{ display: "flex", flexDirection: "column", overflow: "hidden", cursor: "pointer" }} onClick={() => go("product")}>
       {/* image area */}
@@ -111,41 +75,7 @@ export function ProductCard({ p, go, onAdd, onQuickView, theme }) {
   );
 }
 
-export function ProductRow({ p, go, onAdd, onQuickView, theme }) {
-  const isSwiss = theme === "swiss";
-
-  if (isSwiss) {
-    return (
-      <div
-        onClick={() => go("product")}
-        style={{ display: "flex", gap: 24, padding: "16px 0", borderBottom: "2px solid var(--ink)", cursor: "pointer", alignItems: "center" }}
-      >
-        <div style={{ width: 100, height: 100, background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <ProductGlyph type={p.glyph} size={70} />
-        </div>
-        <div style={{ flexGrow: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted)", fontWeight: 700, marginBottom: 2 }}>{p.brand}</div>
-          <a style={{ fontSize: 18, fontWeight: 900, color: "var(--ink)" }}>{p.name}</a>
-          <div style={{ display: "flex", gap: 16, marginTop: 8 }}>
-            {Object.entries(p.specs).slice(0, 3).map(([k, v]) => (
-              <span key={k} style={{ fontSize: 12, color: "var(--muted)" }}>{k}: <b>{v}</b></span>
-            ))}
-          </div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
-          <PriceBlock price={p.price} old={p.old} size={20} />
-          <button
-            className="btn btn-primary btn-sm"
-            onClick={(e) => { e.stopPropagation(); onAdd && onAdd(); }}
-            style={{ height: 32, padding: "0 12px", border: "1px solid var(--ink)" }}
-          >
-            Придбати
-          </button>
-        </div>
-      </div>
-    );
-  }
-
+export function ProductRow({ p, go, onAdd, onQuickView }) {
   return (
     <div className="card lift" style={{ display: "flex", gap: 20, padding: 18, cursor: "pointer", alignItems: "center" }} onClick={() => go("product")}>
       <div style={{ width: 120, height: 120, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
@@ -178,49 +108,7 @@ export function ProductRow({ p, go, onAdd, onQuickView, theme }) {
   );
 }
 
-export function ProductTable({ list, go, onAdd, onQuickView, theme }) {
-  const isSwiss = theme === "swiss";
-
-  if (isSwiss) {
-    return (
-      <div style={{ background: "var(--paper)" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13.5, textAlign: "left" }}>
-          <thead>
-            <tr style={{ borderBottom: "2.5px solid var(--ink)" }}>
-              <th style={{ padding: "12px 8px", fontWeight: 900, textTransform: "uppercase", fontSize: 12 }}>Назва товару</th>
-              <th style={{ padding: "12px 8px", fontWeight: 900, textTransform: "uppercase", fontSize: 12 }}>Артикул</th>
-              <th style={{ padding: "12px 8px", fontWeight: 900, textTransform: "uppercase", fontSize: 12 }}>Наявність</th>
-              <th style={{ padding: "12px 8px", fontWeight: 900, textTransform: "uppercase", fontSize: 12, textAlign: "right" }}>Ціна</th>
-              <th style={{ padding: "12px 8px", fontWeight: 900, textTransform: "uppercase", fontSize: 12, textAlign: "center" }}>Дія</th>
-            </tr>
-          </thead>
-          <tbody>
-            {list.map((p, i) => (
-              <tr key={i} style={{ borderBottom: "1.5px solid var(--ink)", cursor: "pointer" }} onClick={() => go("product")}>
-                <td style={{ padding: "14px 8px" }}>
-                  <div style={{ fontWeight: 800 }}>{p.name}</div>
-                  <div style={{ fontSize: 10.5, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.03em" }}>{p.brand}</div>
-                </td>
-                <td style={{ padding: "14px 8px" }}>{p.art}</td>
-                <td style={{ padding: "14px 8px" }}>
-                  <span style={{ fontWeight: 700, color: p.stock === 'in' ? 'var(--ok)' : 'var(--warn)' }}>
-                    {p.stock === 'in' ? '✓ На складі' : '● Замовлення'}
-                  </span>
-                </td>
-                <td style={{ padding: "14px 8px", textAlign: "right" }}>
-                  <PriceBlock price={p.price} old={p.old} size={15.5} />
-                </td>
-                <td style={{ padding: "14px 8px", textAlign: "center" }} onClick={(e) => e.stopPropagation()}>
-                  <button className="btn btn-primary btn-sm" style={{ padding: "0 10px", height: 28 }} onClick={() => onAdd && onAdd()}>Додати</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-
+export function ProductTable({ list, go, onAdd, onQuickView }) {
   return (
     <div className="card" style={{ overflowX: "auto", background: "var(--paper)" }}>
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13.5, textAlign: "left" }}>
