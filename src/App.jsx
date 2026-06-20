@@ -53,8 +53,7 @@ const FONT_SETS = {
 const APP_DEFAULTS = {
   "accent": "#3DCD58",
   "density": "balanced",
-  "styleTheme": "hybrid",
-  "colorTheme": "schneider",
+  "theme": "light",
   "fontSet": "onest",
   "buyEmphasis": "dark"
 };
@@ -108,88 +107,26 @@ function App() {
   const dens = t.density === "compact" ? .88 : t.density === "airy" ? 1.12 : 1;
 
   let body;
-  if (screen === "home") body = <HomeScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} theme={t.styleTheme} />;
-  else if (screen === "category") body = <CategoryScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} theme={t.styleTheme} />;
-  else if (screen === "catalog") body = <CatalogScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} theme={t.styleTheme} />;
-  else if (screen === "product") body = <ProductScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} theme={t.styleTheme} />;
-  else if (screen === "cart") body = <CartScreen go={go} cart={cart} setCart={setCart} onAdd={addToCart} onQuickView={setQuickViewProduct} theme={t.styleTheme} />;
+  if (screen === "home") body = <HomeScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
+  else if (screen === "category") body = <CategoryScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
+  else if (screen === "catalog") body = <CatalogScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
+  else if (screen === "product") body = <ProductScreen go={go} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
+  else if (screen === "cart") body = <CartScreen go={go} cart={cart} setCart={setCart} onAdd={addToCart} onQuickView={setQuickViewProduct} />;
   else body = <Stub label={meta.label} />;
 
-  const isSwiss = t.styleTheme === "swiss";
-  const isCarbonTech = t.styleTheme === "carbon_tech";
-  const colTheme = t.colorTheme || "default";
-  
-  let ink = "#15171c";
-  let ink2 = "#3c414a";
-  let paper = "#ffffff";
-  let bg = isSwiss ? "#ffffff" : isCarbonTech ? "#0c0d12" : "#f4f3ef";
-  let bg2 = isSwiss ? "#f4f4f5" : isCarbonTech ? "#1c1e27" : "#eceae3";
-  let line = isSwiss ? "#e4e4e7" : isCarbonTech ? "#232631" : "#e4e1d9";
-  let line2 = isSwiss ? "#d4d4d8" : isCarbonTech ? "#343949" : "#d6d2c8";
-  let inkSurface = "#15171c";
-  let accColor = t.accent || "#1e7a4e";
-  let muted = "#80868f";
-  let faint = "#aeb2b8";
+  let ink = "#1B1D1F", ink2 = "#4A4F55", paper = "#ffffff";
+  let bg = "#ffffff", bg2 = "#F4F4F5";
+  let line = "#ECEAE4", line2 = "#DCD9D2";
+  let inkSurface = "#17181A";
+  let accColor = t.accent || "#3DCD58";
+  let muted = "#7C828A", faint = "#A9AEB5";
 
-  // Carbon Tech overrides default palette to be Dark SCADA dashboard
-  if (isCarbonTech && colTheme === "default") {
-    ink = "#F8FAFC";
-    ink2 = "#94A3B8";
-    paper = "#15171e";
-    bg = "#0c0d12";
-    bg2 = "#1c1e27";
-    line = "#232631";
-    line2 = "#343949";
-    inkSurface = "#0c0d12";
-    accColor = t.accent || "#10B981";
-    muted = "#64748B";
-    faint = "#475569";
-  }
-
-  if (colTheme === "graphite") {
-    ink = "#0F172A";
-    ink2 = "#334155";
-    paper = isCarbonTech ? "#151e2e" : "#ffffff";
-    bg = isSwiss ? "#ffffff" : isCarbonTech ? "#0b0f19" : "#F8FAFC";
-    bg2 = isSwiss ? "#F1F5F9" : isCarbonTech ? "#1e293b" : "#E2E8F0";
-    line = isSwiss ? "#E2E8F0" : isCarbonTech ? "#334155" : "#CBD5E1";
-    line2 = isSwiss ? "#CBD5E1" : isCarbonTech ? "#475569" : "#94A3B8";
-    inkSurface = "#0F172A";
-    accColor = "#1E7A4E";
-  } else if (colTheme === "navy") {
-    ink = isCarbonTech ? "#F1F5F9" : "#0B1F33";
-    ink2 = "#1E293B";
-    paper = isCarbonTech ? "#0f2338" : "#FFFFFF";
-    bg = isSwiss ? "#FFFFFF" : isCarbonTech ? "#071424" : "#F0F4F8";
-    bg2 = isSwiss ? "#E1E8F0" : isCarbonTech ? "#152a42" : "#D0DBE5";
-    line = isSwiss ? "#D0DBE5" : isCarbonTech ? "#1e3d61" : "#B8C5D3";
-    line2 = isSwiss ? "#B8C5D3" : isCarbonTech ? "#2d5a8f" : "#91A3B5";
-    inkSurface = "#0B1F33";
-    accColor = "#F97316";
-  } else if (colTheme === "carbon") {
-    ink = "#F8FAFC";
-    ink2 = "#CBD5E1";
-    paper = "#1E2028";
-    bg = isSwiss ? "#0D0E12" : isCarbonTech ? "#090a0d" : "#13141A";
-    bg2 = isSwiss ? "#1E2028" : isCarbonTech ? "#15171d" : "#272A35";
-    line = isSwiss ? "#272A35" : isCarbonTech ? "#22252e" : "#373C4B";
-    line2 = isSwiss ? "#373C4B" : isCarbonTech ? "#2d323e" : "#4E556A";
-    inkSurface = "#0D0E12";
-    accColor = "#10B981";
-    muted = "#94A3B8";
-    faint = "#64748B";
-  } else if (colTheme === "schneider") {
-    ink = "#1B1D1F";
-    ink2 = "#4A4F55";
-    paper = "#ffffff";
-    bg = isCarbonTech ? "#0c0d12" : "#ffffff";
-    bg2 = isCarbonTech ? "#1c1e27" : "#F4F4F5";
-    line = isCarbonTech ? "#232631" : "#ECEAE4";
-    line2 = isCarbonTech ? "#343949" : "#DCD9D2";
-    inkSurface = "#17181A";
-    accColor = t.accent || "#3DCD58";
-    muted = "#7C828A";
-    faint = "#A9AEB5";
+  if (t.theme === "dark") {
+    ink = "#F3F2EE"; ink2 = "#B9BDC2"; paper = "#1B1D1F";
+    bg = "#141517"; bg2 = "#202225";
+    line = "#2A2C2F"; line2 = "#3A3D41";
+    inkSurface = "#0F1011";
+    muted = "#9AA0A6"; faint = "#6B7177";
   }
 
   const fonts = FONT_SETS[t.fontSet] || FONT_SETS.onest;
@@ -213,11 +150,11 @@ function App() {
     "--ink-surface": inkSurface,
     "--muted": muted,
     "--faint": faint,
-    "--r-xs": isSwiss ? "0px" : isCarbonTech ? "4px" : "3px",
-    "--r-sm": isSwiss ? "0px" : isCarbonTech ? "4px" : "5px",
-    "--r-md": isSwiss ? "0px" : isCarbonTech ? "4px" : "8px",
-    "--r-lg": isSwiss ? "0px" : isCarbonTech ? "6px" : "12px",
-    "--mono": isSwiss ? "var(--sans)" : "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace",
+    "--r-xs": "3px",
+    "--r-sm": "5px",
+    "--r-md": "8px",
+    "--r-lg": "12px",
+    "--mono": "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace",
   };
 
   // Push theme variables to html level to cover background/body/modals instantly
@@ -226,10 +163,10 @@ function App() {
     Object.entries(themeVars).forEach(([k, v]) => {
       root.style.setProperty(k, v);
     });
-  }, [colTheme, t.styleTheme, accColor, t.fontSet]);
+  }, [t.theme, accColor, t.fontSet]);
 
   return (
-    <div style={themeVars} className={(isSwiss ? "theme-swiss" : isCarbonTech ? "theme-carbon-tech" : "theme-hybrid") + (t.buyEmphasis === "green" ? " buy-green" : "")}>
+    <div style={themeVars} className={"theme-hybrid" + (t.buyEmphasis === "green" ? " buy-green" : "")}>
       {/* the actual site */}
       <div className="stage" style={{ fontSize: `${15 * dens}px` }}>
         <SiteHeader go={go} screen={screen} cartCount={cart} />
@@ -256,6 +193,11 @@ function App() {
       )}
 
       <TweaksPanel>
+        <TweakSection label="Тема" />
+        <TweakRadio label="Світла / темна" value={t.theme}
+          options={[{ value: "light", label: "Світла" }, { value: "dark", label: "Темна" }]}
+          onChange={(v) => setTweak("theme", v)} />
+
         <TweakSection label="Колір акценту (тест)" />
         <TweakColor label="Зелений" value={t.accent}
           options={ACCENT_GREENS}
