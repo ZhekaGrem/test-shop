@@ -316,15 +316,18 @@ a { color: inherit; text-decoration: none; }
 .btn-block { width: 100%; }
 .btn-icon { width: 44px; padding: 0; }
 
-/* Акцент кнопок — режим «зелені»: міняємо місцями зелений і чорний на ВСІХ кнопках.
-   Темні дії стають зеленими, зелені — чорними (класи + інлайн-кнопки через swap-*). */
-.buy-green .btn-primary { background: var(--accent); color: #fff; }
-.buy-green .btn-primary:hover { background: var(--accent-strong-h); }
-.buy-green .btn-accent { background: var(--ink); color: var(--on-dark); }
-.buy-green .btn-accent:hover { background: #25282f; }
-/* інлайн-кнопки (хедер, hero) — !important перебиває інлайн-стиль і JS-ховери */
-.buy-green .swap-ink { background: var(--accent) !important; color: #fff !important; }
-.buy-green .swap-accent { background: var(--ink) !important; color: var(--on-dark) !important; }
+/* ---------- accent presets ---------- */
+/* Preset A — money_structure: green = Buy CTA + badge-hit; ink = eyebrow accents */
+/* (badge-new already uses --ink; no price-accent or tab.is-active class exists) */
+.accent-money-structure .u-label { color: var(--ink); }
+
+/* Preset B — buy_only: green = ONLY the Buy CTA (.btn-accent); everything else → ink */
+.accent-buy-only .badge-hit,
+.accent-buy-only .u-label { color: var(--ink); }
+.accent-buy-only .badge-hit { background: var(--ink); color: var(--on-dark); }
+.accent-buy-only .btn-primary { background: var(--accent); color: #fff; }
+.accent-buy-only .btn-primary:hover { background: var(--accent-strong-h); }
+.accent-buy-only .btn-accent { background: var(--accent); color: #fff; }
 
 /* ---------- chips / pills / badges ---------- */
 .chip {
@@ -658,51 +661,6 @@ a { color: inherit; text-decoration: none; }
   to { transform: translateX(0); }
 }
 
-/* Swiss theme visual overrides for flat minimalist aesthetics */
-.theme-swiss .tech-detail {
-  display: none !important;
-}
-
-.theme-swiss .card {
-  box-shadow: none !important;
-  border-width: 1.5px !important;
-}
-
-.theme-swiss .lift:hover {
-  box-shadow: none !important;
-  border-color: var(--ink) !important;
-  background: var(--bg-2) !important;
-}
-
-.theme-swiss .btn {
-  border: 1.5px solid var(--ink) !important;
-  box-shadow: none !important;
-}
-
-.theme-swiss .btn-primary {
-  background: var(--ink) !important;
-  color: var(--on-dark) !important;
-}
-
-.theme-swiss .btn-primary:hover {
-  background: var(--paper) !important;
-  color: var(--ink) !important;
-}
-
-.theme-swiss .btn-accent {
-  background: var(--accent) !important;
-  border-color: var(--accent) !important;
-}
-
-.theme-swiss .btn-accent:hover {
-  background: var(--paper) !important;
-  color: var(--accent) !important;
-}
-
-.theme-swiss .stock::before {
-  box-shadow: none !important;
-}
-
 /* Custom ranges, inputs and interactive widgets for Hybrid/Technical theme */
 .tech-slider {
   -webkit-appearance: none;
@@ -770,46 +728,6 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.6;
 }
 
-/* Swiss Modernist Custom styling */
-.theme-swiss .swiss-grid-item {
-  border-top: 2.5px solid var(--ink);
-  padding: 20px 0;
-  display: grid;
-  grid-template-columns: 80px 1.5fr 1fr;
-  align-items: baseline;
-  gap: 16px;
-}
-@media (max-width: 720px) {
-  .theme-swiss .swiss-grid-item {
-    grid-template-columns: 1fr !important;
-    gap: 8px;
-  }
-}
-.theme-swiss .swiss-input {
-  border: 2px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 14px;
-  padding: 12px 16px;
-  outline: none;
-  border-radius: 0;
-  width: 100%;
-}
-.theme-swiss .swiss-input:focus {
-  background: var(--bg-2);
-}
-.theme-swiss .swiss-label {
-  font-size: 11px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ink);
-  margin-bottom: 6px;
-  display: block;
-}
-
 .schematic-lines {
   stroke: var(--ink);
   stroke-width: 2;
@@ -820,123 +738,5 @@ a { color: inherit; text-decoration: none; }
   stroke-width: 2.5;
   fill: none;
 }
-
-/* ---------- Carbon Tech UI overrides ---------- */
-.theme-carbon-tech {
-  background: var(--bg);
-  color: var(--ink);
-}
-
-.theme-carbon-tech .card {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-  border: 1px solid var(--line) !important;
-  background: var(--paper) !important;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Accent glowing line on card top */
-.theme-carbon-tech .card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--accent);
-  opacity: 0.8;
-}
-
-.theme-carbon-tech .btn {
-  font-family: var(--mono) !important;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border: 1px solid var(--line-2);
-}
-
-.theme-carbon-tech .btn-primary {
-  background: var(--accent) !important;
-  color: #fff !important;
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
-}
-
-.theme-carbon-tech .btn-primary:hover {
-  background: var(--accent-strong-h) !important;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
-}
-
-.theme-carbon-tech .btn-ghost:hover {
-  background: var(--bg-2) !important;
-  border-color: var(--accent) !important;
-}
-
-/* SCADA Switch widgets */
-.carbon-toggle {
-  position: relative;
-  display: inline-block;
-  width: 44px;
-  height: 24px;
-}
-.carbon-toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.carbon-slider {
-  position: absolute;
-  cursor: pointer;
-  inset: 0;
-  background-color: var(--line-2);
-  transition: .25s ease;
-  border-radius: 4px;
-  border: 1px solid var(--line);
-}
-.carbon-slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 3px;
-  bottom: 3px;
-  background-color: var(--paper);
-  transition: .25s ease;
-  border-radius: 2px;
-  box-shadow: var(--sh-sm);
-}
-input:checked + .carbon-slider {
-  background-color: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
-}
-input:checked + .carbon-slider:before {
-  transform: translateX(20px);
-  background-color: var(--paper);
-}
-
-/* Custom telemetry progress tracker */
-.scada-progress {
-  width: 100%;
-  height: 6px;
-  background: var(--bg-2);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.scada-progress-bar {
-  height: 100%;
-  background: var(--accent);
-  box-shadow: 0 0 6px var(--accent);
-  transition: width 0.3s ease;
-}
-
-/* blinking animation for live metrics */
-@keyframes blink {
-  50% { opacity: 0; }
-}
-.live-blink {
-  animation: blink 1.2s step-end infinite;
-}
-
 
 
