@@ -1,668 +1,1138 @@
-<!DOCTYPE html>
-<html lang="uk"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kv-electro — Hi-fi магазин електрообладнання</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<style>/* cyrillic-ext */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("71a62ef5-2ae6-43c2-b953-9188606a70d0") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("20f96e91-7af9-4dad-95ad-26677497dd35") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("2ddec4e0-2078-4ad6-b129-86c706c9f40c") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("dea1c6a0-7eb9-4aa0-b789-0db15d13f99d") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("d09cdf84-f7d9-49ae-b741-1843802e72e5") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("6ee6bc5a-c8b4-4a6b-9572-fa574c561058") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("62f3dcf6-b566-4f6b-abd4-4464ebee96e5") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("ee68c0a9-073f-4e71-9f7e-caa742ef5986") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("fb783cf8-dd1d-4daa-a605-3983e2d2de25") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("1bd2d1b8-55ee-4279-a579-8c6f3056d591") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("8c069e16-8514-4dcc-a976-e3f59ef7b8dd") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("f5f99a5a-6bf4-4686-beaf-0d0e3c57174d") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("0a22f8c3-ca06-41fe-ba37-352d69332998") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("1e0fd350-b0bc-4821-93ad-d730c7d7a542") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("61efb2c4-ea01-4883-a0ab-a86eebaab36a") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("2e082198-09c1-43be-a985-504f395c5067") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("8167b97e-0077-4644-9e24-580af9f7243b") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("2e082198-09c1-43be-a985-504f395c5067") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("8167b97e-0077-4644-9e24-580af9f7243b") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("2e082198-09c1-43be-a985-504f395c5067") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("8167b97e-0077-4644-9e24-580af9f7243b") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("2e082198-09c1-43be-a985-504f395c5067") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("8167b97e-0077-4644-9e24-580af9f7243b") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("2e082198-09c1-43be-a985-504f395c5067") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("8167b97e-0077-4644-9e24-580af9f7243b") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-</style>
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kv-electro — Hi-fi магазин електрообладнання</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <style>
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("71a62ef5-2ae6-43c2-b953-9188606a70d0") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("20f96e91-7af9-4dad-95ad-26677497dd35") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("2ddec4e0-2078-4ad6-b129-86c706c9f40c") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("dea1c6a0-7eb9-4aa0-b789-0db15d13f99d") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("d09cdf84-f7d9-49ae-b741-1843802e72e5") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("6ee6bc5a-c8b4-4a6b-9572-fa574c561058") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("62f3dcf6-b566-4f6b-abd4-4464ebee96e5") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("ee68c0a9-073f-4e71-9f7e-caa742ef5986") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("fb783cf8-dd1d-4daa-a605-3983e2d2de25") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("1bd2d1b8-55ee-4279-a579-8c6f3056d591") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("8c069e16-8514-4dcc-a976-e3f59ef7b8dd") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("f5f99a5a-6bf4-4686-beaf-0d0e3c57174d") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("0a22f8c3-ca06-41fe-ba37-352d69332998") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("1e0fd350-b0bc-4821-93ad-d730c7d7a542") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("61efb2c4-ea01-4883-a0ab-a86eebaab36a") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("2e082198-09c1-43be-a985-504f395c5067") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("8167b97e-0077-4644-9e24-580af9f7243b") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format("woff2");
+        unicode-range:
+          U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1,
+          U+03A3-03FF;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("2e082198-09c1-43be-a985-504f395c5067") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("8167b97e-0077-4644-9e24-580af9f7243b") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format("woff2");
+        unicode-range:
+          U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1,
+          U+03A3-03FF;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("2e082198-09c1-43be-a985-504f395c5067") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("8167b97e-0077-4644-9e24-580af9f7243b") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format("woff2");
+        unicode-range:
+          U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1,
+          U+03A3-03FF;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("2e082198-09c1-43be-a985-504f395c5067") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("8167b97e-0077-4644-9e24-580af9f7243b") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format("woff2");
+        unicode-range:
+          U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1,
+          U+03A3-03FF;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url("2e082198-09c1-43be-a985-504f395c5067") format("woff2");
+        unicode-range:
+          U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+          U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url("8167b97e-0077-4644-9e24-580af9f7243b") format("woff2");
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url("f86b1294-6845-47dd-b388-3c9c9f8fed17") format("woff2");
+        unicode-range:
+          U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1,
+          U+03A3-03FF;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url("b8455416-4bc0-45dd-865f-e78c7fd26933") format("woff2");
+        unicode-range:
+          U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+          U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+          U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url("747e52f4-115c-4196-baba-a7a7823c2e13") format("woff2");
+        unicode-range:
+          U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+          U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+          U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "Manrope";
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url("fa10fb45-32c4-4caf-b00e-96e8271ebb39") format("woff2");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-  :root {
-    /* surfaces */
-    --paper: #ffffff;
-    --bg: #f4f3ef;
-    --bg-2: #eceae3;
-    --ink-surface: #15171c;
+      :root {
+        /* surfaces */
+        --paper: #ffffff;
+        --bg: #f4f3ef;
+        --bg-2: #eceae3;
+        --ink-surface: #3dcd58;
 
-    /* ink / text */
-    --ink: #15171c;
-    --ink-2: #3c414a;
-    --muted: #80868f;
-    --faint: #aeb2b8;
-    --on-dark: #f3f2ee;
-    --on-dark-muted: #a7abb0;
+        /* ink / text */
+        --ink: #3dcd58;
+        --ink-2: #3c414a;
+        --muted: #80868f;
+        --faint: #aeb2b8;
+        --on-dark: #f3f2ee;
+        --on-dark-muted: #a7abb0;
 
-    /* lines */
-    --line: #e4e1d9;
-    --line-2: #d6d2c8;
-    --line-dark: #2b2e35;
+        /* lines */
+        --line: #e4e1d9;
+        --line-2: #d6d2c8;
+        --line-dark: #2b2e35;
 
-    /* accent — forest green */
-    --accent: #1e7a4e;
-    --accent-strong: #165e3c99;
-    --accent-strong-h: #115030;
-    --accent-soft: #d4ece1;
-    --accent-tint: #edf7f1;
-    --accent-ink: #08231a;
+        /* accent — forest green */
+        --accent: #1e7a4e;
+        --accent-strong: #165e3c99;
+        --accent-strong-h: #115030;
+        --accent-soft: #d4ece1;
+        --accent-tint: #edf7f1;
+        --accent-ink: #08231a;
 
-    /* status */
-    --ok: #2f7d52;
-    --ok-soft: #e4f0e9;
-    --warn: #b07a16;
-    --sale: #b23a26;
+        /* status */
+        --ok: #2f7d52;
+        --ok-soft: #e4f0e9;
+        --warn: #b07a16;
+        --sale: #b23a26;
 
-    /* type */
-    --sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+        /* type */
+        --sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-    /* radii */
-    --r-xs: 3px;
-    --r-sm: 5px;
-    --r-md: 8px;
-    --r-lg: 12px;
+        /* radii */
+        --r-xs: 3px;
+        --r-sm: 5px;
+        --r-md: 8px;
+        --r-lg: 12px;
 
-    /* shadow */
-    --sh-sm: 0 1px 2px rgba(21,23,28,.05), 0 1px 1px rgba(21,23,28,.04);
-    --sh-md: 0 4px 14px rgba(21,23,28,.07), 0 1px 3px rgba(21,23,28,.05);
-    --sh-lg: 0 18px 50px rgba(21,23,28,.13), 0 4px 12px rgba(21,23,28,.07);
+        /* shadow */
+        --sh-sm:
+          0 1px 2px rgba(21, 23, 28, 0.05), 0 1px 1px rgba(21, 23, 28, 0.04);
+        --sh-md:
+          0 4px 14px rgba(21, 23, 28, 0.07), 0 1px 3px rgba(21, 23, 28, 0.05);
+        --sh-lg:
+          0 18px 50px rgba(21, 23, 28, 0.13), 0 4px 12px rgba(21, 23, 28, 0.07);
 
-    --maxw: 1320px;
-  }
+        --maxw: 1320px;
+      }
 
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
 
-  /* ---------- typography helpers ---------- */
-  .u-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .u-mono { font-family: var(--mono); font-feature-settings: "tnum" 1; }
-  .u-tnum { font-feature-settings: "tnum" 1; font-variant-numeric: tabular-nums; }
-  .u-display { font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
-  h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -.015em; line-height: 1.1; }
+      /* ---------- typography helpers ---------- */
+      .u-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .u-mono {
+        font-family: var(--mono);
+        font-feature-settings: "tnum" 1;
+      }
+      .u-tnum {
+        font-feature-settings: "tnum" 1;
+        font-variant-numeric: tabular-nums;
+      }
+      .u-display {
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        line-height: 1.1;
+      }
 
-  a { color: inherit; text-decoration: none; }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-  /* ---------- layout ---------- */
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+      /* ---------- layout ---------- */
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 28px;
+      }
 
-  /* ---------- buttons ---------- */
-  .btn {
-    appearance: none; cursor: pointer; border: none; outline: none;
-    font-family: var(--sans); font-weight: 600; font-size: 14px;
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 0 18px; height: 44px; border-radius: var(--r-sm);
-    transition: background .15s, color .15s, border-color .15s, transform .04s;
-    white-space: nowrap; line-height: 1;
-  }
-  .btn:active { transform: translateY(1px); }
-  .btn-primary { background: var(--ink); color: var(--on-dark); }
-  .btn-primary:hover { background: #25282f; }
-  .btn-accent { background: var(--accent); color: #fff; }
-  .btn-accent:hover { background: var(--accent-strong-h); }
-  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-2); }
-  .btn-ghost:hover { border-color: var(--ink); background: #fff; }
-  .btn-soft { background: var(--bg-2); color: var(--ink); }
-  .btn-soft:hover { background: #e3e0d8; }
-  .btn-sm { height: 38px; font-size: 13px; padding: 0 14px; }
-  .btn-lg { height: 50px; font-size: 15px; padding: 0 26px; }
-  .btn-block { width: 100%; }
-  .btn-icon { width: 44px; padding: 0; }
+      /* ---------- buttons ---------- */
+      .btn {
+        appearance: none;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        font-family: var(--sans);
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 18px;
+        height: 44px;
+        border-radius: var(--r-sm);
+        transition:
+          background 0.15s,
+          color 0.15s,
+          border-color 0.15s,
+          transform 0.04s;
+        white-space: nowrap;
+        line-height: 1;
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn-primary {
+        background: var(--ink);
+        color: var(--on-dark);
+      }
+      .btn-primary:hover {
+        background: #25282f;
+      }
+      .btn-accent {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-accent:hover {
+        background: var(--accent-strong-h);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line-2);
+      }
+      .btn-ghost:hover {
+        border-color: var(--ink);
+        background: #fff;
+      }
+      .btn-soft {
+        background: var(--bg-2);
+        color: var(--ink);
+      }
+      .btn-soft:hover {
+        background: #e3e0d8;
+      }
+      .btn-sm {
+        height: 38px;
+        font-size: 13px;
+        padding: 0 14px;
+      }
+      .btn-lg {
+        height: 50px;
+        font-size: 15px;
+        padding: 0 26px;
+      }
+      .btn-block {
+        width: 100%;
+      }
+      .btn-icon {
+        width: 44px;
+        padding: 0;
+      }
 
-  /* ---------- chips / pills / badges ---------- */
-  .chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--mono); font-size: 11.5px; font-weight: 500;
-    padding: 4px 9px; border-radius: var(--r-xs);
-    background: var(--bg-2); color: var(--ink-2); border: 1px solid transparent;
-    white-space: nowrap;
-  }
-  .chip-line { background: var(--paper); border-color: var(--line-2); }
-  .chip-accent { background: var(--accent-tint); color: var(--accent); border-color: var(--accent-soft); }
-  .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
-    padding: 3px 7px; border-radius: var(--r-xs); text-transform: uppercase;
-  }
-  .badge-sale { background: var(--sale); color: #fff; }
-  .badge-new { background: var(--ink); color: var(--on-dark); }
-  .badge-hit { background: var(--accent); color: #fff; }
-  .stock { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--ok); }
-  .stock::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px var(--ok-soft); }
-  .stock.order { color: var(--warn); }
-  .stock.order::before { background: var(--warn); box-shadow: 0 0 0 3px #f3ead3; }
+      /* ---------- chips / pills / badges ---------- */
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        font-weight: 500;
+        padding: 4px 9px;
+        border-radius: var(--r-xs);
+        background: var(--bg-2);
+        color: var(--ink-2);
+        border: 1px solid transparent;
+        white-space: nowrap;
+      }
+      .chip-line {
+        background: var(--paper);
+        border-color: var(--line-2);
+      }
+      .chip-accent {
+        background: var(--accent-tint);
+        color: var(--accent);
+        border-color: var(--accent-soft);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: var(--mono);
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 3px 7px;
+        border-radius: var(--r-xs);
+        text-transform: uppercase;
+      }
+      .badge-sale {
+        background: var(--sale);
+        color: #fff;
+      }
+      .badge-new {
+        background: var(--ink);
+        color: var(--on-dark);
+      }
+      .badge-hit {
+        background: var(--accent);
+        color: #fff;
+      }
+      .stock {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--ok);
+      }
+      .stock::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--ok);
+        box-shadow: 0 0 0 3px var(--ok-soft);
+      }
+      .stock.order {
+        color: var(--warn);
+      }
+      .stock.order::before {
+        background: var(--warn);
+        box-shadow: 0 0 0 3px #f3ead3;
+      }
 
-  /* ---------- surfaces ---------- */
-  .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md); }
-  .hairline { height: 1px; background: var(--line); border: none; margin: 0; }
+      /* ---------- surfaces ---------- */
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--r-md);
+      }
+      .hairline {
+        height: 1px;
+        background: var(--line);
+        border: none;
+        margin: 0;
+      }
 
-  /* ---------- product glyph (geometric module illustration) ---------- */
-  .glyph { display: block; }
+      /* ---------- product glyph (geometric module illustration) ---------- */
+      .glyph {
+        display: block;
+      }
 
-  /* hover affordance for clickable */
-  .lift { transition: box-shadow .16s, border-color .16s, transform .16s; }
-  .lift:hover { box-shadow: var(--sh-md); border-color: var(--line-2); }
+      /* hover affordance for clickable */
+      .lift {
+        transition:
+          box-shadow 0.16s,
+          border-color 0.16s,
+          transform 0.16s;
+      }
+      .lift:hover {
+        box-shadow: var(--sh-md);
+        border-color: var(--line-2);
+      }
 
-  /* scrollbars */
-  ::-webkit-scrollbar { height: 10px; width: 10px; }
-  ::-webkit-scrollbar-thumb { background: #d3cfc5; border-radius: 20px; border: 2px solid var(--bg); }
-  ::-webkit-scrollbar-track { background: transparent; }
+      /* scrollbars */
+      ::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d3cfc5;
+        border-radius: 20px;
+        border: 2px solid var(--bg);
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
 
-  /* interaction states */
-  .nav-link:hover { background: var(--bg-2); color: var(--ink); }
-  .crumb-link:hover, .foot-link:hover, .util-link:hover { color: var(--accent) !important; }
-  .hdr-icon:hover { color: var(--accent); }
-  .card-title:hover { color: var(--accent); }
-  .filter-check:hover span:last-child, .filter-check:hover { color: var(--ink); }
-  .search-bar:hover { box-shadow: 0 0 0 3px rgba(189,122,28,.12); }
-  .cat-card:hover .glyph { transform: scale(1.04); transition: transform .2s; }
+      /* interaction states */
+      .nav-link:hover {
+        background: var(--bg-2);
+        color: var(--ink);
+      }
+      .crumb-link:hover,
+      .foot-link:hover,
+      .util-link:hover {
+        color: var(--accent) !important;
+      }
+      .hdr-icon:hover {
+        color: var(--accent);
+      }
+      .card-title:hover {
+        color: var(--accent);
+      }
+      .filter-check:hover span:last-child,
+      .filter-check:hover {
+        color: var(--ink);
+      }
+      .search-bar:hover {
+        box-shadow: 0 0 0 3px rgba(189, 122, 28, 0.12);
+      }
+      .cat-card:hover .glyph {
+        transform: scale(1.04);
+        transition: transform 0.2s;
+      }
 
-  /* image placeholder slot */
-  .ph {
-    background-color: var(--bg-2);
-    background-image: repeating-linear-gradient(135deg, transparent 0 7px, rgba(21,23,28,.035) 7px 8px);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--faint); font-family: var(--mono); font-size: 11px; letter-spacing: .05em;
-    border-radius: var(--r-sm);
-  }
+      /* image placeholder slot */
+      .ph {
+        background-color: var(--bg-2);
+        background-image: repeating-linear-gradient(
+          135deg,
+          transparent 0 7px,
+          rgba(21, 23, 28, 0.035) 7px 8px
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--faint);
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        border-radius: var(--r-sm);
+      }
 
-  /* ---------- prototype toolbar ---------- */
-  .proto-bar {
-    position: sticky; top: 0; z-index: 60;
-    background: rgba(21,23,28,.96); backdrop-filter: blur(8px);
-    color: var(--on-dark); border-bottom: 1px solid var(--line-dark);
-  }
-  .proto-inner { max-width: 1480px; margin: 0 auto; padding: 9px 22px; display: flex; align-items: center; gap: 18px; }
-  .proto-brand { display: flex; align-items: center; gap: 10px; }
-  .proto-logo { font-family: var(--sans); font-weight: 800; font-size: 15px; letter-spacing: -.02em; background: var(--accent); color:#fff; width: 28px; height: 28px; border-radius: var(--r-xs); display: flex; align-items: center; justify-content: center; }
-  .proto-title { font-size: 13px; font-weight: 600; }
-  .proto-sub { font-size: 11px; color: var(--on-dark-muted); }
-  .proto-tabs { display: flex; gap: 3px; margin-left: auto; flex-wrap: wrap; }
-  .proto-tab { appearance: none; cursor: pointer; background: transparent; border: 1px solid transparent; color: var(--on-dark-muted); font-family: var(--sans); font-size: 13px; font-weight: 500; padding: 6px 13px; border-radius: var(--r-sm); white-space: nowrap; transition: .12s; }
-  .proto-tab:hover { color: #fff; background: rgba(255,255,255,.07); }
-  .proto-tab.is-active { color: var(--ink); background: var(--on-dark); font-weight: 700; }
-  .proto-back { appearance: none; cursor: pointer; width: 32px; height: 32px; border-radius: var(--r-sm); border: 1px solid var(--line-dark); background: transparent; color: var(--on-dark); font-size: 15px; }
-  .proto-back:disabled { opacity: .35; cursor: default; }
+      /* ---------- prototype toolbar ---------- */
+      .proto-bar {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        background: rgba(21, 23, 28, 0.96);
+        backdrop-filter: blur(8px);
+        color: var(--on-dark);
+        border-bottom: 1px solid var(--line-dark);
+      }
+      .proto-inner {
+        max-width: 1480px;
+        margin: 0 auto;
+        padding: 9px 22px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .proto-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .proto-logo {
+        font-family: var(--sans);
+        font-weight: 800;
+        font-size: 15px;
+        letter-spacing: -0.02em;
+        background: var(--accent);
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: var(--r-xs);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .proto-title {
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .proto-sub {
+        font-size: 11px;
+        color: var(--on-dark-muted);
+      }
+      .proto-tabs {
+        display: flex;
+        gap: 3px;
+        margin-left: auto;
+        flex-wrap: wrap;
+      }
+      .proto-tab {
+        appearance: none;
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--on-dark-muted);
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 500;
+        padding: 6px 13px;
+        border-radius: var(--r-sm);
+        white-space: nowrap;
+        transition: 0.12s;
+      }
+      .proto-tab:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.07);
+      }
+      .proto-tab.is-active {
+        color: var(--ink);
+        background: var(--on-dark);
+        font-weight: 700;
+      }
+      .proto-back {
+        appearance: none;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--r-sm);
+        border: 1px solid var(--line-dark);
+        background: transparent;
+        color: var(--on-dark);
+        font-size: 15px;
+      }
+      .proto-back:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
 
-  .stage { min-height: 100vh; }
+      .stage {
+        min-height: 100vh;
+      }
 
-  /* ---------- responsive ---------- */
-  .hide-sm { }
-  @media (max-width: 1080px) {
-    .hide-md { display: none !important; }
-    .cat-grid { grid-template-columns: repeat(3, 1fr) !important; }
-    .prod-grid { grid-template-columns: repeat(3, 1fr) !important; }
-    .footer-grid { grid-template-columns: 1.4fr 1fr 1fr !important; }
-  }
-  @media (max-width: 920px) {
-    .hero-grid { grid-template-columns: 1fr !important; }
-    .trust-strip { grid-template-columns: repeat(2, 1fr) !important; }
-    .trust-strip > div:nth-child(3) { border-left: none !important; }
-    .trust-strip > div:nth-child(n+3) { border-top: 1px solid var(--line); }
-  }
-  @media (max-width: 720px) {
-    .wrap { padding: 0 18px; }
-    .hide-lg { display: none !important; }
-    .cat-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    .prod-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
-  }
-  @media (max-width: 560px) {
-    .hide-sm { display: none !important; }
-    .trust-strip, .cat-grid, .prod-grid { grid-template-columns: 1fr !important; }
-  }
+      /* ---------- responsive ---------- */
+      .hide-sm {
+      }
+      @media (max-width: 1080px) {
+        .hide-md {
+          display: none !important;
+        }
+        .cat-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+        .prod-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+        .footer-grid {
+          grid-template-columns: 1.4fr 1fr 1fr !important;
+        }
+      }
+      @media (max-width: 920px) {
+        .hero-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .trust-strip {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+        .trust-strip > div:nth-child(3) {
+          border-left: none !important;
+        }
+        .trust-strip > div:nth-child(n + 3) {
+          border-top: 1px solid var(--line);
+        }
+      }
+      @media (max-width: 720px) {
+        .wrap {
+          padding: 0 18px;
+        }
+        .hide-lg {
+          display: none !important;
+        }
+        .cat-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+        .prod-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr !important;
+          gap: 28px !important;
+        }
+      }
+      @media (max-width: 560px) {
+        .hide-sm {
+          display: none !important;
+        }
+        .trust-strip,
+        .cat-grid,
+        .prod-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
 
-  /* list & detail layouts */
-  @media (max-width: 1080px) {
-    .filter-sidebar { display: none !important; }
-    .prod-grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
-    .product-layout, .cart-layout { grid-template-columns: 1fr !important; }
-    .buy-box, .summary-box { position: static !important; }
-  }
-  @media (max-width: 720px) {
-    .prod-grid-3 { grid-template-columns: 1fr !important; }
-    .gallery-thumbs { display: none !important; }
-    .delivery-grid { grid-template-columns: 1fr !important; }
-    .cart-row { flex-wrap: wrap; }
-  }
+      /* list & detail layouts */
+      @media (max-width: 1080px) {
+        .filter-sidebar {
+          display: none !important;
+        }
+        .prod-grid-3 {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+        .product-layout,
+        .cart-layout {
+          grid-template-columns: 1fr !important;
+        }
+        .buy-box,
+        .summary-box {
+          position: static !important;
+        }
+      }
+      @media (max-width: 720px) {
+        .prod-grid-3 {
+          grid-template-columns: 1fr !important;
+        }
+        .gallery-thumbs {
+          display: none !important;
+        }
+        .delivery-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .cart-row {
+          flex-wrap: wrap;
+        }
+      }
 
-  /* reveal — base state is visible; animation only nudges position so a
+      /* reveal — base state is visible; animation only nudges position so a
      paused/background frame never hides content (safe for screenshots/export) */
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal { animation: rise .45s cubic-bezier(.2,.7,.3,1) both; }
-    @keyframes rise { from { transform: translateY(9px); } to { transform: none; } }
-  }
-</style>
+      @media (prefers-reduced-motion: no-preference) {
+        .reveal {
+          animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+        }
+        @keyframes rise {
+          from {
+            transform: translateY(9px);
+          }
+          to {
+            transform: none;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
 
-</head>
-<body>
-<div id="root"></div>
+    <script
+      src="62e52d37-11a7-4600-b9e9-57bad767485e"
+      integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="3274bde8-4979-4c8d-8e96-a2cf53bd4b24"
+      integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="da63be37-1e68-4bab-868d-3d58184f0bcd"
+      integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+      crossorigin="anonymous"
+    ></script>
 
-<script src="62e52d37-11a7-4600-b9e9-57bad767485e" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="3274bde8-4979-4c8d-8e96-a2cf53bd4b24" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="da63be37-1e68-4bab-868d-3d58184f0bcd" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-
-<script type="text/babel" src="02a64ff8-a128-43c1-9d16-e0978b018080"></script>
-<script type="text/babel" src="79ee7499-f0b5-4455-ae70-756fff8258f9"></script>
-<script type="text/babel" src="206d3bbf-fe62-47c4-b1d6-645b4b1951b0"></script>
-<script type="text/babel" src="aa2b7012-77cd-490d-9498-2400e4f2f78f"></script>
-<script type="text/babel" src="c92b4457-49b4-4b86-bb44-89c9fbb86d5f"></script>
-<script type="text/babel" src="bfbb0083-24a5-401f-a281-91680532b840"></script>
-<script type="text/babel" src="72c42b5e-31e2-4c16-b124-f6b05773c8a0"></script>
-<script type="text/babel" src="cd2977e1-02e0-4bd7-b0b6-fe3b8f134f1b"></script>
-<script type="text/babel" src="168e7d78-76b2-4cd7-bbcf-e902fc55d577"></script>
-<script type="text/babel" src="e896162f-6b11-47e9-aab0-2c1c22880ce3"></script>
-<script type="text/babel" src="361f2864-02c7-4333-bc6a-ad30eedac85f"></script>
-
-
-</body></html>
+    <script
+      type="text/babel"
+      src="02a64ff8-a128-43c1-9d16-e0978b018080"
+    ></script>
+    <script
+      type="text/babel"
+      src="79ee7499-f0b5-4455-ae70-756fff8258f9"
+    ></script>
+    <script
+      type="text/babel"
+      src="206d3bbf-fe62-47c4-b1d6-645b4b1951b0"
+    ></script>
+    <script
+      type="text/babel"
+      src="aa2b7012-77cd-490d-9498-2400e4f2f78f"
+    ></script>
+    <script
+      type="text/babel"
+      src="c92b4457-49b4-4b86-bb44-89c9fbb86d5f"
+    ></script>
+    <script
+      type="text/babel"
+      src="bfbb0083-24a5-401f-a281-91680532b840"
+    ></script>
+    <script
+      type="text/babel"
+      src="72c42b5e-31e2-4c16-b124-f6b05773c8a0"
+    ></script>
+    <script
+      type="text/babel"
+      src="cd2977e1-02e0-4bd7-b0b6-fe3b8f134f1b"
+    ></script>
+    <script
+      type="text/babel"
+      src="168e7d78-76b2-4cd7-bbcf-e902fc55d577"
+    ></script>
+    <script
+      type="text/babel"
+      src="e896162f-6b11-47e9-aab0-2c1c22880ce3"
+    ></script>
+    <script
+      type="text/babel"
+      src="361f2864-02c7-4333-bc6a-ad30eedac85f"
+    ></script>
+  </body>
+</html>

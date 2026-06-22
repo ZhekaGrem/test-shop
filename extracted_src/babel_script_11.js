@@ -115,7 +115,7 @@ function App() {
       <TweaksPanel>
         <TweakSection label="Акцентний колір" />
         <TweakColor label="Колір бренду" value={t.accent}
-          options={["#1e7a4e", "#15603c", "#1f5fb0", "#7a4e1e", "#b23a26", "#3dcd58"]}
+          options={["#1e7a4e", "#15603c", "#1f5fb0", "#7a4e1e", "#b23a26", "#15171c"]}
           onChange={(v) => setTweak("accent", v)} />
         <TweakSection label="Щільність" />
         <TweakRadio label="Інтерфейс" value={t.density}
